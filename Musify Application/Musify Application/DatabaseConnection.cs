@@ -39,5 +39,11 @@ namespace Musify_Application
             conn.Close();
             return _dataset;
         }
+
+        public void UpdateDatabase(DataSet ds)
+        {
+            SqlCommandBuilder cb = new SqlCommandBuilder(_adapter);
+            cb.DataAdapter.Update(ds.Tables[0]);
+        }
     }
 }
