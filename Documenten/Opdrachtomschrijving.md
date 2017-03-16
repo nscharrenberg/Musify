@@ -133,7 +133,7 @@ Onderdelen:
 ![erDiagram](images/erd.png)
 
 # Database Design
-![dbOntwerp] (images/dbo.png)
+![dbDiagram](images/dbo.png)
 
 
 
