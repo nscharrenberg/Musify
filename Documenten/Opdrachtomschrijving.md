@@ -129,6 +129,11 @@ Onderdelen:
 * Naam
 * Beschrijving
 
+# Entity-Relationship Diagram
+![erDiagram](images/erd.png)
+
+# Database Design
+![dbOntwerp] (images/dbo.png)
 
 
 
