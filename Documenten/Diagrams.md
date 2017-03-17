@@ -36,7 +36,7 @@ De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitle
 
 ---
 
-##### Woordenlijst
+#### Woordenlijst
 | Woord 			| 	Uitleg 			|
 | ----- 			| ------ 			|
 | User  			| Gebruiker			|
