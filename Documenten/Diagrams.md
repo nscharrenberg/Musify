@@ -33,7 +33,9 @@ Deze Artists kunnen gekoppeld worden als een `similar` `artist`. Als een `User` 
 Daarnaast maakt de `Artist` ook nog een bepaald `Genre`, denk hierbij aan pop, rock, electro, r&b, hip hop, country etc... Een `Artist` kan meerdere `Genres` hebben, en `Genres` kunnen gemaakt worden door meerdere `Artists`.
 De `Genre` entiteit heeft de attributen `name`, `description` en `image` waarbij eigenlijk hetzelfde geld als bij de andere `entiteiten` die deze attributen hebben gehad.
 De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitleg wat het `Genre` inhoud, en de `image` geeft het `Genre` visueel weer.
+
 ---
+
 ##### Woordenlijst
 | Woord 			| 	Uitleg 			|
 | ----- 			| ------ 			|
