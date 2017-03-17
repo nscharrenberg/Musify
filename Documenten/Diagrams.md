@@ -1,6 +1,5 @@
-# Musify diagrams
-## Version 1
-### Entity-Relationship Diagram
+# Musify diagrams Versie 1
+## Entity-Relationship Diagram
 ![erDiagram](images/v1/erd.png)
 
 #### Uitleg
@@ -67,10 +66,10 @@ De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitle
 
 
 
-### Database Design
+## Database Design
 ![dbDiagram](images/v1/dbo.png)
 
-### Database Design
+## Database Design
 ![cDiagram](images/v1/class.png)
 
 
