@@ -1,6 +1,5 @@
-# Musify diagrams
-## Version 1
-### Entity-Relationship Diagram
+# Musify diagrams Versie 1
+## Entity-Relationship Diagram
 ![erDiagram](images/v1/erd.png)
 
 #### Uitleg
@@ -12,7 +11,6 @@ Daarnaast heeft het ook gegevens die nodig zodat je je kan identificeren, denk h
 <br>
 De `User` kan een `Free` `User` of een `Paid` `User` zijn. De `Free` `User` krijgt advertenties te zien voordat er een nummer word afgespeeld. De `Paid` `User` krijgt geen advertenties te zijn, maar kan daarnaast ook nog een `Songs` downloaden om offline te beluisteren.
 Het systeem controleerd dan ook of de `User` betaald heeft of niet, en indien hij betaald heeft, wanneer de laatste keer is dat hij heeft betaald.
-<br>
 Een `Paid` `User` kan zoveel `Songs` downloaden als de `User` wilt.
 <br>
 Een `User` kan ook een `Song` opslaan, hierbij hoeft er niet gekeken of het een `Free` of `Paid` user is, aangezien beide groepen dit kunnen doen. 
@@ -29,16 +27,49 @@ De `Album` entiteit bevat de volgende attributen: `name`, `release_date` en `ima
 <br>
 Een `Album` word gemaakt door een `Artist`, de `Artist` kan dan ook 0 of meer `Albums` hebben.
 De `Artist` entiteit heeft de attributen `name`, `image`, en `biography`. de `name` geeft weer wie de `artist` is, de `afbeelding` geeft de `User` wat visualiteit, zodat de `User` weet hoe de `Artist` eruit ziet, en als laatste is er de `biography` waar het leven / de cariere van de `Artist` word weergegeven.
-Een `Artist` maakt een bepaalde soort muziek, maar er zijn ook andere `Artists` die soortgelijke muziek maken, of onder hetzelfde rijtje vallen als de `Artist.
+Een `Artist` maakt een bepaalde soort muziek, maar er zijn ook andere `Artists` die soortgelijke muziek maken, of onder hetzelfde rijtje vallen als de `Artist`.
 Deze Artists kunnen gekoppeld worden als een `similar` `artist`. Als een `User` een bepaalde `Song` van een `Artist` luisterd, dan zal eronder een rijtje met `similar` `artists` tevoorschijn komen, die de `User` ook andere `Songs` en `Artists` laat ervaren, die de `User` misschien niet kende.
 Daarnaast maakt de `Artist` ook nog een bepaald `Genre`, denk hierbij aan pop, rock, electro, r&b, hip hop, country etc... Een `Artist` kan meerdere `Genres` hebben, en `Genres` kunnen gemaakt worden door meerdere `Artists`.
 De `Genre` entiteit heeft de attributen `name`, `description` en `image` waarbij eigenlijk hetzelfde geld als bij de andere `entiteiten` die deze attributen hebben gehad.
 De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitleg wat het `Genre` inhoud, en de `image` geeft het `Genre` visueel weer.
 
-### Database Design
+---
+
+#### Woordenlijst
+| Woord 			| 	Uitleg 			|
+| ----- 			| ------ 			|
+| User  			| Gebruiker			|
+| Profile Foto		| Profiel Foto		|
+| Password 			| Wachtwoord		|
+| name				| naam				|
+| username			| gebruikersnaam	|
+| has				| heeft				|
+| follows			| volgt				|
+| Free				| Gratis			|
+| Ads				| Advertenties		|
+| Paid				| Betaald			|
+| Saves				| Opslaan			|
+| Playlist 			| Afspeellijst		|
+| image				| afbeelding		|
+| description		| beschrijving		|
+| public 			| publiek / open	|
+| Added Toe			| Toegevoegt aan	|
+| Song				| Lied				|
+| duration			| duur / lengte		|
+| url				| link / locatie	|
+| is part of		| is onderdeel van	|
+| release_date 		| uitbreng datum	|
+| Artist			| Artiest			|
+| Similar			| soortgelijk 		|
+| biography 		| biografie			|
+| makes				| maakt				|
+
+
+
+## Database Design
 ![dbDiagram](images/v1/dbo.png)
 
-### Database Design
+## Database Design
 ![cDiagram](images/v1/class.png)
 
 
