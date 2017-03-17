@@ -28,7 +28,7 @@ De `Album` entiteit bevat de volgende attributen: `name`, `release_date` en `ima
 <br>
 Een `Album` word gemaakt door een `Artist`, de `Artist` kan dan ook 0 of meer `Albums` hebben.
 De `Artist` entiteit heeft de attributen `name`, `image`, en `biography`. de `name` geeft weer wie de `artist` is, de `afbeelding` geeft de `User` wat visualiteit, zodat de `User` weet hoe de `Artist` eruit ziet, en als laatste is er de `biography` waar het leven / de cariere van de `Artist` word weergegeven.
-Een `Artist` maakt een bepaalde soort muziek, maar er zijn ook andere `Artists` die soortgelijke muziek maken, of onder hetzelfde rijtje vallen als de `Artist.
+Een `Artist` maakt een bepaalde soort muziek, maar er zijn ook andere `Artists` die soortgelijke muziek maken, of onder hetzelfde rijtje vallen als de `Artist`.
 Deze Artists kunnen gekoppeld worden als een `similar` `artist`. Als een `User` een bepaalde `Song` van een `Artist` luisterd, dan zal eronder een rijtje met `similar` `artists` tevoorschijn komen, die de `User` ook andere `Songs` en `Artists` laat ervaren, die de `User` misschien niet kende.
 Daarnaast maakt de `Artist` ook nog een bepaald `Genre`, denk hierbij aan pop, rock, electro, r&b, hip hop, country etc... Een `Artist` kan meerdere `Genres` hebben, en `Genres` kunnen gemaakt worden door meerdere `Artists`.
 De `Genre` entiteit heeft de attributen `name`, `description` en `image` waarbij eigenlijk hetzelfde geld als bij de andere `entiteiten` die deze attributen hebben gehad.
