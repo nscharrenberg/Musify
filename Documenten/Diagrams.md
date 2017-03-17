@@ -33,6 +33,37 @@ Deze Artists kunnen gekoppeld worden als een `similar` `artist`. Als een `User` 
 Daarnaast maakt de `Artist` ook nog een bepaald `Genre`, denk hierbij aan pop, rock, electro, r&b, hip hop, country etc... Een `Artist` kan meerdere `Genres` hebben, en `Genres` kunnen gemaakt worden door meerdere `Artists`.
 De `Genre` entiteit heeft de attributen `name`, `description` en `image` waarbij eigenlijk hetzelfde geld als bij de andere `entiteiten` die deze attributen hebben gehad.
 De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitleg wat het `Genre` inhoud, en de `image` geeft het `Genre` visueel weer.
+---
+##### Woordenlijst
+| Woord 			| 	Uitleg 			|
+| ----- 			| ------ 			|
+| User  			| Gebruiker			|
+| Profile Foto		| Profiel Foto		|
+| Password 			| Wachtwoord		|
+| name				| naam				|
+| username			| gebruikersnaam	|
+| has				| heeft				|
+| follows			| volgt				|
+| Free				| Gratis			|
+| Ads				| Advertenties		|
+| Paid				| Betaald			|
+| Saves				| Opslaan			|
+| Playlist 			| Afspeellijst		|
+| image				| afbeelding		|
+| description		| beschrijving		|
+| public 			| publiek / open	|
+| Added Toe			| Toegevoegt aan	|
+| Song				| Lied				|
+| duration			| duur / lengte		|
+| url				| link / locatie	|
+| is part of		| is onderdeel van	|
+| release_date 		| uitbreng datum	|
+| Artist			| Artiest			|
+| Similar			| soortgelijk 		|
+| biography 		| biografie			|
+| makes				| maakt				|
+
+
 
 ### Database Design
 ![dbDiagram](images/v1/dbo.png)
