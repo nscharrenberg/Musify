@@ -12,7 +12,6 @@ Daarnaast heeft het ook gegevens die nodig zodat je je kan identificeren, denk h
 <br>
 De `User` kan een `Free` `User` of een `Paid` `User` zijn. De `Free` `User` krijgt advertenties te zien voordat er een nummer word afgespeeld. De `Paid` `User` krijgt geen advertenties te zijn, maar kan daarnaast ook nog een `Songs` downloaden om offline te beluisteren.
 Het systeem controleerd dan ook of de `User` betaald heeft of niet, en indien hij betaald heeft, wanneer de laatste keer is dat hij heeft betaald.
-<br>
 Een `Paid` `User` kan zoveel `Songs` downloaden als de `User` wilt.
 <br>
 Een `User` kan ook een `Song` opslaan, hierbij hoeft er niet gekeken of het een `Free` of `Paid` user is, aangezien beide groepen dit kunnen doen. 
