@@ -6,13 +6,18 @@
 #### Uitleg
 Ik begin de uitleg van de Musify ERD bij de `user`. Dit omdat dit een gemakkelijk start punt is, en alle andere onderdelen op de een of andere manier zijn verbonden aan de `User`. 
 <br>
-De `User` entiteit heeft een aantal standaard attributen, denk hierbij aan de naam, email en straatnaam. Daarnaast heeft het ook gegevens die nodig zodat je je kan identificeren, denk hierbij aan de gebruikersnaam en wachtwoord, en als laatste is hoe je jezelf presenteerd naar andere doormiddel van een profielfoto.
+De `User` entiteit heeft een aantal standaard attributen, denk hierbij aan de naam, email en straatnaam. 
+<br>
+Daarnaast heeft het ook gegevens die nodig zodat je je kan identificeren, denk hierbij aan de gebruikersnaam en wachtwoord, en als laatste is hoe je jezelf presenteerd naar andere doormiddel van een profielfoto.
+<br>
 De `User` kan een `Free` `User` of een `Paid` `User` zijn. De `Free` `User` krijgt advertenties te zien voordat er een nummer word afgespeeld. De `Paid` `User` krijgt geen advertenties te zijn, maar kan daarnaast ook nog een `Songs` downloaden om offline te beluisteren.
 Het systeem controleerd dan ook of de `User` betaald heeft of niet, en indien hij betaald heeft, wanneer de laatste keer is dat hij heeft betaald.
+<br>
 Een `Paid` `User` kan zoveel `Songs` downloaden als de `User` wilt.
 <br>
 Een `User` kan ook een `Song` opslaan, hierbij hoeft er niet gekeken of het een `Free` of `Paid` user is, aangezien beide groepen dit kunnen doen. 
 Als ze een `Song` goed vinden, dan kunnen ze deze aan de `User` koppelen, zodat de `User` de `Song` later gemakkelijk kan terug vinden.
+<br>
 De `Song` entiteit heeft ook een aantal standaard attributen, denk hierbij aan de naam van de `Song`, de `duration`, en de `url` dat gezocht moet worden als een `User` de `Song` wilt afspelen.
 <br>
 De `User` kan ook een `Playlist` aanmaken of beluisteren hierbij kan de `User` een `Song` toevoegen aan de `Playlist`. De `User` die de `Playlist` beluisterd zal de `Song` die is toegevoegt dan ook kunnen beluisteren.
