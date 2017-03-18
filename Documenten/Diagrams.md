@@ -69,6 +69,50 @@ De `name` staat voor de naam van het `Genre`, de `description` geeft korte uitle
 ## Database Design
 ![dbDiagram](images/v1/dbo.png)
 
+#### Uitleg
+Ook bij het database ontwerp zal ik beginnen bij de `User` met dezelfde reden als bij het ERD.
+Het database ontwerp heeft met fields (attributen in ERD), en de relationship ruiten worden nu entiteiten. 
+<Br>
+De `User` heeft een de standaard gegevens die nodig zijn, en het profiel persoonlijker kunnen maken voor anderen. 
+elke `id` is uniek, en word automatisch aan een `User` gebonden. Zo krijgt gebruiker1 het `id` 1, en krijgt gebruiker2 het `id` 2, etc...
+<br>
+ook zijn `email` en `username` unieke namen, en kunnen deze niet 2x voorkomen in de database. Indien er dus al een `User` is met de naam gebruiker1, dan kan er niet nog een `User` zijn met de naam gebruiker1.
+Hetzelfde geld met de `email`, er mag maar 1 `email` zijn, en er kunnen niet 2 `Users` zijn met hetzelfde email address.
+<br>
+Ook word er gekeken of de `User` al betaald heeft, hiervoor is er een boolean `paid`, dat aangeeft of het een `paid` of `free` `User` is. (zoals te zien in ERD)
+Indien de `User` op `paid` staat, dan word er ook gekeken wanneer de laatste keer is dat de `User` heeft betaald. Wanneer de `User` namelijk betaald dan zal de tijd en datum hier opgeslagen worden.
+Als de `User` inlogt dan word gecontroleerd of de `User` een `paid` of een `free` user is, en indien `paid` wanneer de laatste keer is.
+Als de `User` langer dan een maand geleden betaald heeft, dan word de gebruiker automatisch op `free` gezet.
+<br>
+net als `User` heeft ook `Song` een `id` die dezelfde functie heeft, maar dan voor de `Songs`.
+`Song` heeft opzich dezelfde fields behouden als dat er op het ERD stonden. 
+Het enige verschil is dat `url` op het ERD, is vergroot naar 3 fields. Hiervoor kan er een URL voor youtube gebruikt worden `youtube_url`, een url voor soundcloud `soundcloud_url`, maar er moet een url van onze eigen server zijn `server_url`.
+Zo kan een `User` ook via externe servers de muziek luisteren, als onze servers overbelast zijn, of traag worden.
+<br>
+Dan heeft een `Song` ook nog foreign Keys. Deze koppelen entiteiten met elkaar, en zo kan je makkelijk een `Song` koppelen aan een `Album`, doormiddel van het `id`.
+In `Song` komt bijvoorbeeld het `id` van het `Album` waarvan de `Song` is.
+een `Song` word dan ook gekoppeld met een `Album`, en met een `Artist`.
+<br>
+Een `User` kan nummers opslaan, dit word bijgehouden in de `song_user` entiteit, dat een relationship was op het ERD (ruit).
+Hierbij zijn er 2 Foreign Keys, die de `User` koppelen met de `Song` dat opgeslagen moet worden.
+Ook word er bijgehouden wanneer de `User` de `Song` heeft opgeslagen met `created_at`.
+<br>
+Een `User` kan ook een andere `User` volgen, de relationship die hier op het ERD voor werd gebruikt word nu ook omgezet naar een entiteit, dat beide `Users` opslaat en koppeld met elkaar.
+Zo is er een Foreign Key met de naam `Follower_id` dit is de `User` die een andere `USer` volgt, en `followed_id` dat is de `User` dat gevolgt word. Hiervoor word ook bijgehouden wanneer een `User` een andere `User` is gaan volgen.
+<br>
+De `Playlist` entiteit heeft over het algemeen precies dezelfde fields als op het ERD waren bij de attributen. Hierbij word nu alleen ook bijgehouden wanneer de `Playlist` is aangemaakt, en wanneer het voor de laatste keer is bewerkt, met de `updated_at` field.
+Dit houd bij wanneer je de `Playlist` voor het laatst hebt bewerkt door de naam te veranderen, het public te maken, een afbeelding te veranderen, of om een `Song` toe te voegen.
+<br>
+Als een `User` een `Playlist` maakt, dan word deze gekoppelt doormiddel van de `playlist_user` entiteit. Hierbij word de `id` van de `Playlist` gekoppelt met de `id` van de `User`.
+Ook `owner` field word dan op 1 gezet, wat inhoud dat de `User` de maker/eigenaar is van de `Playlist`. 
+Wanneer een andere gebruiker deze `Playlist` vervolgens toevoegt, dan is de `owner` 0 voor die `User`, wat betekent dat de `User` niet de eigenaar is van de `Playlist`.
+De `User` waarbij `owner` op 1 staat, kan alleen dingen aanpassen en toevoegen, en de `Users` waarbij `owner` op 0 staat, kunnen alleen bekijken en luisteren.
+<br>
+Je kan natuurlijk ook een `Song` aan een `Playlist` toevoegen, hiervoor is de `playlist_song` entiteit.
+Deze koppelt een `Song` aan een `Playlist` doormiddel van de `id`. Ook kan er een bepaalde positie gezet worden voor de `Song`. Zo kan een `Song` als eerste voorkomen, maar ook op een andere positie.
+<br>
+
+
 ## Database Design
 ![cDiagram](images/v1/class.png)
 
