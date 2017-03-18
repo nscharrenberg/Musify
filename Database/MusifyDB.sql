@@ -93,9 +93,8 @@ CREATE TABLE [Song] (
   [server_url] varchar(255),
   [album_id] INT,
   [album_artist_id] INT,
-  PRIMARY KEY ([id], [album_id], [album_artist_id]),
-  CONSTRAINT fk_tr_album_id FOREIGN KEY (album_id) REFERENCES Album([id]),
-  CONSTRAINT fk_tr_album_artist_id FOREIGN KEY (album_artist_id) REFERENCES Album([id])
+  PRIMARY KEY ([id]),
+  CONSTRAINT fk_tr_album_id FOREIGN KEY (album_id, album_artist_id) REFERENCES Album([id], [artist_id])
 );
 
 -- -----------------------------------------------------
@@ -141,8 +140,8 @@ CREATE TABLE [Playlist_Song] (
   [playlist_id] INT,
   [song_id] INT,
   [position] INT,
-  CHECK ([position] <= 0)
-  PRIMARY KEY (playlist_id], [song_id]),
+  CHECK ([position] <= 0),
+  PRIMARY KEY ([playlist_id], [song_id]),
   CONSTRAINT fk_pt_playlist_id FOREIGN KEY (playlist_id) REFERENCES Playlist([id]),
   CONSTRAINT fk_pt_song_id FOREIGN KEY (song_id) REFERENCES Song([id])
 );
