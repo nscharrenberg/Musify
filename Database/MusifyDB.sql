@@ -16,10 +16,10 @@ CREATE TABLE [Users] (
   [password] varchar(255) NOT NULL,
   [avatar_url] varchar(255) NOT NULL,
   [permissions] TEXT NOT NULL,
-  [created_at] DATETIME NOT NULL,
-  [updated_at] DATETIME,
+  [created_at] DATE DEFAULT GETDATE() NOT NULL,
+  [updated_at] DATE DEFAULT GETDATE(),
   [paid] tinyint NOT NULL,
-  [last_paid] DATETIME NOT NULL,
+  [last_paid] DATE DEFAULT GETDATE() NOT NULL,
   PRIMARY KEY ([id]),
   CONSTRAINT unique_user_email UNIQUE ([email] ASC)
 );
@@ -32,8 +32,8 @@ CREATE TABLE [Genre] (
   [name] varchar(100) NOT NULL,
   [description] TEXT NOT NULL,
   [image_url] varchar(255) NOT NULL,
-  [created_at] DATETIME NOT NULL,
-  [updated_at] DATETIME,
+  [created_at] DATE DEFAULT GETDATE() NOT NULL,
+  [updated_at] DATE DEFAULT GETDATE(),
   PRIMARY KEY ([id])
 );
 
@@ -46,8 +46,8 @@ CREATE TABLE [Artist] (
   [image_big_url] varchar(255) NOT NULL,
   [image_small_url] varchar(255) NOT NULL,
   [BIO] TEXT,
-  [created_at] DATETIME NOT NULL,
-  [updated_at] DATETIME,
+  [created_at] DATE DEFAULT GETDATE() NOT NULL,
+  [updated_at] DATE DEFAULT GETDATE(),
   PRIMARY KEY ([id]),
   CONSTRAINT unique_artist_name UNIQUE([name] ASC)
 );
@@ -61,8 +61,8 @@ CREATE TABLE [Playlist] (
   [public] tinyint NOT NULL,
   [image_url] varchar(255),
   [description] TEXT,
-  [created_at] DATETIME,
-  [updated_at] DATETIME,
+  [created_at] DATE DEFAULT GETDATE() NOT NULL,
+  [updated_at] DATE DEFAULT GETDATE(),
   PRIMARY KEY ([id]),
 );
 
@@ -141,6 +141,7 @@ CREATE TABLE [Playlist_Song] (
   [playlist_id] INT,
   [song_id] INT,
   [position] INT,
+  CHECK ([position] <= 0)
   PRIMARY KEY (playlist_id], [song_id]),
   CONSTRAINT fk_pt_playlist_id FOREIGN KEY (playlist_id) REFERENCES Playlist([id]),
   CONSTRAINT fk_pt_song_id FOREIGN KEY (song_id) REFERENCES Song([id])
@@ -163,8 +164,8 @@ CREATE TABLE [Similar_Artist] (
 CREATE TABLE [Follow] (
   [follower_id] INT,
   [followed_id] INT,
-  [created_at] DATETIME
-  PRIMARY KEY ([follower_id], [followed_id])
+  [created_at] DATE DEFAULT GETDATE(),
+  PRIMARY KEY ([follower_id], [followed_id]),
   CONSTRAINT fk_fol_follower_id FOREIGN KEY (follower_id) REFERENCES Users([id]),
   CONSTRAINT fk_fol_followed_id FOREIGN KEY (followed_id) REFERENCES Users([id])
 );
