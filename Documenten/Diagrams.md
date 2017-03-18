@@ -111,10 +111,18 @@ De `User` waarbij `owner` op 1 staat, kan alleen dingen aanpassen en toevoegen, 
 Je kan natuurlijk ook een `Song` aan een `Playlist` toevoegen, hiervoor is de `playlist_song` entiteit.
 Deze koppelt een `Song` aan een `Playlist` doormiddel van de `id`. Ook kan er een bepaalde positie gezet worden voor de `Song`. Zo kan een `Song` als eerste voorkomen, maar ook op een andere positie.
 <br>
-
-
-## Database Design
-![cDiagram](images/v1/class.png)
-
+Elke `Song` heeft 1 `Album`, zoals eerder al is gezegt word er aan een `Song` een `Album` gekoppeld.
+De album heeft ook vrijwel dezelfde fields behouden als op het ERD. Het enige is dat de `image` is gesplitst in 2 afbeeldingen. namelijk `img_big_url` en `img_small_url`, dit zijn voor de grote variant en de kleine variant van de `image`.
+Een `Album` heeft ook altijd 1 `Artist` en word doormiddel van een Foreign Key aan de `Artist` gekoppelt via het `id` van de `Artist`.
+<br>
+De `Artist` heeft ook alles behouden, en net als de `Album` alleen de `image` gesplitst in hetzelfde principe.
+Een `Artist` heeft ook een soortgelijke `Artist`, dit word in de `similar_artist` entiteit dat eerst een relationship was op het ERD, geregelt.
+Hierbij word de `id` van de `Artist` gekoppeld met het `id` van de `Artist` dat hetzelfde soort muziek maakt.
+<br>
+Een `Song` kan ook andere `Artists` zijn, die mee hebben geholpen aan de `Song`. Hierbij worden de `id` van de `Song` en de `id` van de `Artist` gekoppeld.
+en is de `Artist` `featured` in de `Song`.
+<br>
+De `Genre` bevat ook dezelfde fields als op het ERD is. 
+`genre_artist` houd bij welke `Genres` de `Artist` maakt of heeft, en koppelt de `id` van `Genre` met de `id` van `Artist`.
 
 
