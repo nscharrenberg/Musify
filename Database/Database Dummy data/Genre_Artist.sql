@@ -1,0 +1,10 @@
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('3/11/2017', 3, 1);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('1/10/2017', 5, 3);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('8/5/2016', 1, 8);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('5/8/2017', 9, 5);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('1/19/2016', 3, 6);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('1/22/2016', 6, 1);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('11/15/2016', 10, 7);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('9/1/2016', 1, 1);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('2/3/2017', 2, 2);
+insert into Genre_Artist (created_at, genre_id, artist_id) values ('2/3/2017', 2, 10);

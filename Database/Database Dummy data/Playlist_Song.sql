@@ -1,0 +1,10 @@
+insert into Playlist_Song (position, playlist_id, song_id) values (1, 5, 5);
+insert into Playlist_Song (position, playlist_id, song_id) values (2, 5, 9);
+insert into Playlist_Song (position, playlist_id, song_id) values (3, 5, 2);
+insert into Playlist_Song (position, playlist_id, song_id) values (1, 2, 6);
+insert into Playlist_Song (position, playlist_id, song_id) values (2, 2, 5);
+insert into Playlist_Song (position, playlist_id, song_id) values (1, 1, 1);
+insert into Playlist_Song (position, playlist_id, song_id) values (1, 3, 7);
+insert into Playlist_Song (position, playlist_id, song_id) values (2, 3, 6);
+insert into Playlist_Song (position, playlist_id, song_id) values (3, 3, 2);
+insert into Playlist_Song (position, playlist_id, song_id) values (1, 10, 10);

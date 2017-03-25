@@ -1,0 +1,10 @@
+insert into Follow (follower_id, followed_id) values (1, 6);
+insert into Follow (follower_id, followed_id) values (6, 1);
+insert into Follow (follower_id, followed_id) values (5, 4);
+insert into Follow (follower_id, followed_id) values (5, 3);
+insert into Follow (follower_id, followed_id) values (9, 5);
+insert into Follow (follower_id, followed_id) values (6, 2);
+insert into Follow (follower_id, followed_id) values (2, 3);
+insert into Follow (follower_id, followed_id) values (1, 9);
+insert into Follow (follower_id, followed_id) values (10, 6);
+insert into Follow (follower_id, followed_id) values (3, 7);
