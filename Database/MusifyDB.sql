@@ -1,181 +1,192 @@
--- SQL Create script made by Noah Scharrenberg
--- 03/17/2017
--- Application: Musify
--- Software Engineering 2 - Fundamentals Killerapp
---
-
--- -----------------------------------------------------
--- Table User
--- -----------------------------------------------------
-CREATE TABLE [Users] (
-  [id] INT IDENTITY,
-  [firstname] varchar(100) NOT NULL,
-  [lastname] varchar(100) NOT null,
+---
+--- Users
+---
+CREATE TABLE [User] (
+  [id] INT,
+  [firstname] varchar(100),
+  [lastname] varchar(100),
   [gender] varchar(10),
-  [email] varchar(255) NOT NULL,
-  [password] varchar(255) NOT NULL,
-  [avatar_url] varchar(255) NOT NULL,
-  [permissions] TEXT NOT NULL,
-  [created_at] DATE DEFAULT GETDATE() NOT NULL,
-  [updated_at] DATE DEFAULT GETDATE(),
-  [paid] tinyint NOT NULL,
-  [last_paid] DATE DEFAULT GETDATE() NOT NULL,
-  PRIMARY KEY ([id]),
-  CONSTRAINT unique_user_email UNIQUE ([email] ASC)
-);
-
--- -----------------------------------------------------
--- Table Genre
--- -----------------------------------------------------
-CREATE TABLE [Genre] (
-  [id] INT IDENTITY,
-  [name] varchar(100) NOT NULL,
-  [description] TEXT NOT NULL,
-  [image_url] varchar(255) NOT NULL,
-  [created_at] DATE DEFAULT GETDATE() NOT NULL,
-  [updated_at] DATE DEFAULT GETDATE(),
+  [username] varchar(255),
+  [email] varchar(255),
+  [password] varchar(255),
+  [avatar_url] varchar(255),
+  [permissions] TEXT,
+  [created_at] DATETIME,
+  [updated_at] DATETIME,
+  [paid] BIT,
+  [last_paid] DATETIME,
   PRIMARY KEY ([id])
 );
+CREATE INDEX [N] ON  [User] ([gender], [avatar_url], [last_paid]);
+CREATE INDEX [U] ON  [User] ([email]);
 
--- -----------------------------------------------------
--- Table Artist
--- -----------------------------------------------------
-CREATE TABLE [Artist] (
-  [id] INT IDENTITY,
-  [name] varchar(255) NOT NULL,
-  [image_big_url] varchar(255) NOT NULL,
-  [image_small_url] varchar(255) NOT NULL,
-  [BIO] TEXT,
-  [created_at] DATE DEFAULT GETDATE() NOT NULL,
-  [updated_at] DATE DEFAULT GETDATE(),
-  PRIMARY KEY ([id]),
-  CONSTRAINT unique_artist_name UNIQUE([name] ASC)
+---
+--- Follow
+---
+CREATE TABLE [follow] (
+  [follower_id] INT,
+  [followed_id] INT,
+  [created_at] DATETIME
 );
+CREATE INDEX [FK, PK] ON  [follow] ([follower_id], [followed_id]);
 
--- -----------------------------------------------------
--- Table Playlist
--- -----------------------------------------------------
-CREATE TABLE [Playlist] (
-  [id] INT IDENTITY,
-  [name] varchar(255) NOT NULL,
-  [public] tinyint NOT NULL,
-  [image_url] varchar(255),
+---
+--- Genre
+---
+CREATE TABLE [genre] (
+  [id] INT,
+  [name] varchar(100),
   [description] TEXT,
-  [created_at] DATE DEFAULT GETDATE() NOT NULL,
-  [updated_at] DATE DEFAULT GETDATE(),
-  PRIMARY KEY ([id]),
+  [image_url] varchar(255),
+  [created_at] DATETIME,
+  [updated_at] DATETIME,
+  PRIMARY KEY ([id])
 );
+CREATE INDEX [U] ON  [genre] ([name]);
 
--- -----------------------------------------------------
--- Table ALbum
--- -----------------------------------------------------
-CREATE TABLE [Album] (
-  [id] INT IDENTITY,
+---
+--- Artist
+---
+CREATE TABLE [artist] (
+  [id] INT,
+  [name] varchar(255),
+  [image_big_url] varchar(255),
+  [image_small_url] varchar(255),
+  [BIO] TEXT,
+  [created_at] DATETIME,
+  [updated_at] DATETIME,
+  PRIMARY KEY ([id])
+);
+CREATE INDEX [N] ON  [artist] ([image_small_url]);
+
+---
+--- Album
+---
+CREATE TABLE [album] (
+  [id] INT,
   [name] varchar(255),
   [release_date] DATETIME,
   [img_big_url] varchar(255),
   [img_small_url] varchar(255),
-  [artist_id] INT NOT NULL,
-  PRIMARY KEY ([id], [artist_id]),
-  CONSTRAINT fk_alb_artist_id FOREIGN KEY (artist_id) REFERENCES Users([id])
+  [created_at] DATETIME,
+  [updated_at] DATETIME,
+  [artist_id] INT,
+  PRIMARY KEY ([id])
 );
+CREATE INDEX [N] ON  [album] ([img_small_url]);
+CREATE INDEX [FK] ON  [album] ([artist_id]);
 
--- -----------------------------------------------------
--- Table Song
--- -----------------------------------------------------
+---
+--- Song
+---
 CREATE TABLE [Song] (
-  [id] INT IDENTITY,
+  [id] INT,
   [name] varchar(255),
-  [number] int,
-  [duration] int,
+  [number] INT,
+  [duration] INT,
   [youtube_url] varchar(255),
   [soundcloud_url] varchar(255),
   [server_url] varchar(255),
   [album_id] INT,
   [album_artist_id] INT,
-  PRIMARY KEY ([id]),
-  CONSTRAINT fk_tr_album_id FOREIGN KEY (album_id, album_artist_id) REFERENCES Album([id], [artist_id])
+  PRIMARY KEY ([id])
 );
+CREATE INDEX [N] ON  [Song] ([number], [youtube_url], [soundcloud_url]);
+CREATE INDEX [FK] ON  [Song] ([album_id], [album_artist_id]);
 
--- -----------------------------------------------------
--- Table Song_User
--- -----------------------------------------------------
-CREATE TABLE [Song_User] (
-  [created_at] DATETIME,
-  [user_id] INT,
-  [song_id] INT,
-  PRIMARY KEY ([user_id], [song_id]),
-  CONSTRAINT fk_tu_user_id FOREIGN KEY (user_id) REFERENCES Users([id]),
-  CONSTRAINT fk_tu_song_id FOREIGN KEY (song_id) REFERENCES Song([id])
-);
-
--- -----------------------------------------------------
--- Table Genre_Artist
--- -----------------------------------------------------
-CREATE TABLE [Genre_Artist] (
-  [created_at] DATETIME,
+---
+--- Genre_artist
+---
+CREATE TABLE [genre_artist] (
   [genre_id] INT,
   [artist_id] INT,
-  PRIMARY KEY ([genre_id], [artist_id]),
-  CONSTRAINT fk_ga_genre_id FOREIGN KEY (genre_id) REFERENCES Genre([id]),
-  CONSTRAINT fk_ga_artist_id FOREIGN KEY (artist_id) REFERENCES Artist([id])
+  [created_at] DATETIME
 );
+CREATE INDEX [FK, PK] ON  [genre_artist] ([genre_id], [artist_id]);
 
--- -----------------------------------------------------
--- Table Playlist_User
--- -----------------------------------------------------
-CREATE TABLE [Playlist_User] (
-  [owner] tinyint,
+---
+--- Featured Artists
+---
+CREATE TABLE [featured] (
+  [artist_id] INT,
+  [song_id] INT
+);
+CREATE INDEX [FK, PK] ON  [featured] ([artist_id], [song_id]);
+
+---
+--- Similar artists
+---
+CREATE TABLE [similar_artist] (
+  [similar_id] INT,
+  [artist_id] INT
+);
+CREATE INDEX [FK, PK] ON  [similar_artist] ([similar_id], [artist_id]);
+
+---
+--- song_user
+---
+CREATE TABLE [song_user] (
+  [created_at] DATETIME,
+  [user_id] INT,
+  [song_id] INT
+);
+CREATE INDEX [FK, PK] ON  [song_user] ([user_id], [song_id]);
+
+
+---
+--- Playlist
+---
+CREATE TABLE [playlist] (
+  [id] INT,
+  [name] varchar(255),
+  [public] BIT,
+  [image_url] varchar(255),
+  [description] TEXT,
+  [created_at] DATETIME,
+  [updated_at] DATETIME,
+  PRIMARY KEY ([id])
+);
+CREATE INDEX [N] ON  [playlist] ([image_url]);
+
+---
+--- Playlist_User
+---
+CREATE TABLE [playlist_user] (
   [playlist_id] INT,
   [user_id] INT,
-  PRIMARY KEY ([playlist_id], [user_id]),
-  CONSTRAINT fk_pu_playlist_id FOREIGN KEY (playlist_id) REFERENCES Playlist([id]),
-  CONSTRAINT fk_pu_user_id FOREIGN KEY (user_id) REFERENCES Users([id])
+  [owner] BIT
 );
+CREATE INDEX [FK, PK] ON  [playlist_user] ([playlist_id], [user_id]);
 
--- -----------------------------------------------------
--- Table Playlist_Song
--- -----------------------------------------------------
-CREATE TABLE [Playlist_Song] (
+---
+--- Playlist_Song
+---
+CREATE TABLE [playlist_song] (
   [playlist_id] INT,
   [song_id] INT,
-  [position] INT,
-  CHECK ([position] <= 0),
-  PRIMARY KEY ([playlist_id], [song_id]),
-  CONSTRAINT fk_pt_playlist_id FOREIGN KEY (playlist_id) REFERENCES Playlist([id]),
-  CONSTRAINT fk_pt_song_id FOREIGN KEY (song_id) REFERENCES Song([id])
+  [position] INT
 );
+CREATE INDEX [FK, PK] ON  [playlist_song] ([playlist_id], [song_id]);
+CREATE INDEX [N] ON  [playlist_song] ([position]);
 
--- -----------------------------------------------------
--- Table Simliar_Artist
--- -----------------------------------------------------
-CREATE TABLE [Similar_Artist] (
-  [similar_id] INT,
-  [artist_id] INT,
-  PRIMARY KEY ([similar_id], [artist_id]),
-  CONSTRAINT fk_sa_similar_id FOREIGN KEY (similar_id) REFERENCES Artist([id]),
-  CONSTRAINT fk_sa_artist_id FOREIGN KEY (artist_id) REFERENCES Artist([id])
-);
 
--- -----------------------------------------------------
--- Table Follow
--- -----------------------------------------------------
-CREATE TABLE [Follow] (
-  [follower_id] INT,
-  [followed_id] INT,
-  [created_at] DATE DEFAULT GETDATE(),
-  PRIMARY KEY ([follower_id], [followed_id]),
-  CONSTRAINT fk_fol_follower_id FOREIGN KEY (follower_id) REFERENCES Users([id]),
-  CONSTRAINT fk_fol_followed_id FOREIGN KEY (followed_id) REFERENCES Users([id])
-);
 
--- -----------------------------------------------------
--- Table Featured Artists
--- -----------------------------------------------------
-CREATE TABLE [Featured] (
-[artist_id] INT,
-[song_id] INT,
-PRIMARY KEY ([artist_id], [song_id]),
-CONSTRAINT fk_fa_artist_id FOREIGN KEY (artist_id) REFERENCES Artist([id]),
-CONSTRAINT fk_fa_song_id FOREIGN KEY (song_id) REFERENCES Song([id])
-);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
