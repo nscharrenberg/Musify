@@ -47,21 +47,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAO\GenreDAO.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="ArtistFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ArtistFrm.Designer.cs">
+      <DependentUpon>ArtistFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAO\ArtistDAO.cs" />
+    <Compile Include="DAO\GenreDAO.cs" />
+    <Compile Include="DAO\PlaylistDAO.cs" />
+    <Compile Include="ErrorHandling.cs" />
+    <Compile Include="GenreFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenreFrm.Designer.cs">
+      <DependentUpon>GenreFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IArtistContext.cs" />
     <Compile Include="Interface\IGenreContext.cs" />
+    <Compile Include="Interface\IPlaylistContext.cs" />
+    <Compile Include="Logic\Artist.cs" />
     <Compile Include="Logic\Genre.cs" />
+    <Compile Include="Logic\IConvertible.cs" />
+    <Compile Include="Logic\Playlist.cs" />
+    <Compile Include="PlaylistFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlaylistFrm.Designer.cs">
+      <DependentUpon>PlaylistFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries.cs" />
+    <Compile Include="Repository\ArtistRepository.cs" />
     <Compile Include="Repository\GenreRepository.cs" />
+    <Compile Include="Repository\PlaylistRepository.cs" />
     <Compile Include="SqlDataAccessObject.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ArtistFrm.resx">
+      <DependentUpon>ArtistFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenreFrm.resx">
+      <DependentUpon>GenreFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlaylistFrm.resx">
+      <DependentUpon>PlaylistFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

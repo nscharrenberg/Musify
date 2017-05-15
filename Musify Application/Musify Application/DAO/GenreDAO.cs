@@ -13,15 +13,16 @@ namespace Musify_Application.DAO
     {
         private SqlDataAccessObject sqlDAO = new SqlDataAccessObject();
         List<Genre> genreList = new List<Genre>();
+
         public void AddGenre(string name, string description, string image)
         {
-            string query = "INSERT INTO [genre] ([name], [description], [image_url], [created_at], [updated_at]) values ('" + name + "', '" + description + "', '" + image + "', '" + DateTime.Now.ToString("MM'/'dd'/'yyyy HH:mm:ss") + "', '" + DateTime.Now.ToString("MM'/'dd'/'yyyy HH:mm:ss") + "')";
+            string query = @"INSERT INTO [genre] ([name], [description], [image_url], [created_at], [updated_at]) values ('" + name + "', '" + description + "', '" + image + "', '" + DateTime.Now.ToString("MM'/'dd'/'yyyy HH:mm:ss") + "', '" + DateTime.Now.ToString("MM'/'dd'/'yyyy HH:mm:ss") + "')";
             sqlDAO.ExecuteNonQuery(query);
         }
 
         public List<Genre> AllGenres()
         {
-            string query = "SELECT * FROM [genre]";
+            string query = @"SELECT * FROM [genre]";
             DataTable dt = sqlDAO.Execute(query);
             
             foreach (DataRow dr in dt.Rows)

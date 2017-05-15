@@ -14,19 +14,15 @@ using Musify_Application.Repository;
 
 namespace Musify_Application
 {
-    public partial class Form1 : Form
+    public partial class GenreFrm : Form
     {
         static GenreDAO genreDao = new GenreDAO();
         GenreRepository gr = new GenreRepository(genreDao);
-        private int refreshedTimes = 1;
+        ErrorHandling eh = new ErrorHandling();
 
-        public Form1()
+        public GenreFrm()
         {
             InitializeComponent();
-        }
-
-        private void saveBtn_Click(object sender, EventArgs e)
-        {
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -39,7 +35,7 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }
             
             try
@@ -48,7 +44,7 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }
             
         }
@@ -64,7 +60,7 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }
         }
 
@@ -83,7 +79,7 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             } 
         }
 
@@ -98,7 +94,7 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }  
         }
 
@@ -112,11 +108,29 @@ namespace Musify_Application
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }
         }
 
         private void refreshTimer_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gr.DeleteGenreById(Convert.ToInt16(genreIDLbl.Text));
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+            }
+            
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
         {
             try
             {
@@ -124,17 +138,40 @@ namespace Musify_Application
                 genreList.ValueMember = "id";
                 genreList.DisplayMember = "name";
                 genreList.DataSource = gr.AllGenres();
-                errorLbl.Text = "List has been Updated " + refreshedTimes++ + "Times!";
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                eh.WriteToFile(ex.Message);
             }
         }
 
-        private void deleteBtn_Click(object sender, EventArgs e)
+        private void artistToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gr.DeleteGenreById(Convert.ToInt16(genreIDLbl.Text));
+            try
+            {
+                this.Hide();
+                ArtistFrm af = new ArtistFrm();
+                af.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+            }
+            
+        }
+
+        private void playlistToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Hide();
+                PlaylistFrm pf = new PlaylistFrm();
+                pf.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+            }
         }
     }
 }
