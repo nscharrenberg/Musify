@@ -22,9 +22,23 @@ namespace Musify_Application.Repository
             return context.GetAllUsers();
         }
 
+        public DataTable GetMyNotifications(int userId)
+        {
+            return context.GetMyNotifications(userId);
+        }
+
+        public void DeleteReadNotifications(int userId)
+        {
+            context.DeleteReadNotifications(userId);
+        }
         public void MakePlaylist(string playlist, string description, string imageUrl, DateTime createdAt, bool isPublic, int userId, bool isOwner)
         {
             context.MakePlaylist(playlist, description, imageUrl, createdAt, isPublic, userId, isOwner);
+        }
+
+        public void GetNotificationCount(int userId)
+        {
+            context.GetNotificationCount(userId);
         }
     }
 }

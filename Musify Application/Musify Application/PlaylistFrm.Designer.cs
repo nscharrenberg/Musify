@@ -43,6 +43,7 @@
             this.formsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genreToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,7 +169,8 @@
             // 
             this.formsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.genreToolStripMenuItem,
-            this.genreToolStripMenuItem1});
+            this.genreToolStripMenuItem1,
+            this.notificationsToolStripMenuItem});
             this.formsToolStripMenuItem.Name = "formsToolStripMenuItem";
             this.formsToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.formsToolStripMenuItem.Text = "Forms";
@@ -176,16 +178,23 @@
             // genreToolStripMenuItem
             // 
             this.genreToolStripMenuItem.Name = "genreToolStripMenuItem";
-            this.genreToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.genreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.genreToolStripMenuItem.Text = "Artist";
             this.genreToolStripMenuItem.Click += new System.EventHandler(this.genreToolStripMenuItem_Click);
             // 
             // genreToolStripMenuItem1
             // 
             this.genreToolStripMenuItem1.Name = "genreToolStripMenuItem1";
-            this.genreToolStripMenuItem1.Size = new System.Drawing.Size(105, 22);
+            this.genreToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.genreToolStripMenuItem1.Text = "Genre";
             this.genreToolStripMenuItem1.Click += new System.EventHandler(this.genreToolStripMenuItem1_Click);
+            // 
+            // notificationsToolStripMenuItem
+            // 
+            this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
+            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.notificationsToolStripMenuItem.Text = "Notifications";
+            this.notificationsToolStripMenuItem.Click += new System.EventHandler(this.notificationsToolStripMenuItem_Click);
             // 
             // PlaylistFrm
             // 
@@ -231,5 +240,6 @@
         private System.Windows.Forms.ToolStripMenuItem formsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genreToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem notificationsToolStripMenuItem;
     }
 }

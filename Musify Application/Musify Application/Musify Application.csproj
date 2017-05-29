@@ -70,6 +70,12 @@
     <Compile Include="Logic\Genre.cs" />
     <Compile Include="Logic\IConvertible.cs" />
     <Compile Include="Logic\Playlist.cs" />
+    <Compile Include="Notification Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Notification Test.Designer.cs">
+      <DependentUpon>Notification Test.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlaylistFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenreFrm.resx">
       <DependentUpon>GenreFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notification Test.resx">
+      <DependentUpon>Notification Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlaylistFrm.resx">
       <DependentUpon>PlaylistFrm.cs</DependentUpon>
@@ -112,7 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,14 +11,36 @@ namespace Musify_Application.DAO
 {
     public class PlaylistDAO : IPlaylistContext
     {
-        private SqlDataAccessObject sqlDAO = new SqlDataAccessObject();
-
+        static SqlDataAccessObject sqlDAO = new SqlDataAccessObject();
+        SqlConnection conn = new SqlConnection(sqlDAO.Connectionstring);
         public DataTable GetAllUsers()
         {
             string query = "SELECT * FROM [User]";
             DataTable dt = sqlDAO.Execute(query);
 
             return dt;
+        }
+
+        public DataTable GetMyNotifications(int userId)
+        {
+            string query = "SELECT item FROM notification WHERE receiver_id = @userId";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@userId", SqlDbType.Int);
+            command.Parameters["@userId"].Value = userId;
+
+            DataTable dt = sqlDAO.Execute(command);
+
+            return dt;
+        }
+
+        public void DeleteReadNotifications(int userId)
+        {
+            string query = "DELETE FROM notification WHERE receiver_id = @userId";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@userId", SqlDbType.Int);
+            command.Parameters["@userId"].Value = userId;
+
+            sqlDAO.ExecuteNonQuery(command);
         }
 
         public void MakePlaylist(string playlist, string description, string imageUrl, DateTime createdAt, bool isPublic, int userId, bool isOwner)
@@ -34,6 +56,11 @@ namespace Musify_Application.DAO
             command.Parameters.Add("@Owner", SqlDbType.Bit).Value = isOwner;
 
             sqlDAO.ExecuteNonQuery(command);
+        }
+
+        public void GetNotificationCount(int userId)
+        {
+            
         }
     }
 }

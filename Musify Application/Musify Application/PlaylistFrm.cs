@@ -81,5 +81,19 @@ namespace Musify_Application
                 eh.WriteToFile(ex.ToString());
             }
         }
+
+        private void notificationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Hide();
+                Notification_Test nf = new Notification_Test();
+                nf.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+            }
+        }
     }
 }

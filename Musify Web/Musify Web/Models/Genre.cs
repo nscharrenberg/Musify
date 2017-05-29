@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,46 +8,69 @@ namespace Musify_Web.Models
 {
     public class Genre
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string Image { get; private set; }
-        public List<Artist> Artists { get; private set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get;  set; }
+        public bool Public { get; set; }
 
-        public Genre(string name, string description, string image)
-        {
-            Name = name;
-            Description = description;
-            Image = image;
-        }
+        // List
+        public List<Artist> Artists { get; set; }
+        public List<Song> Songs { get; set; }
 
-        public Genre(int id, string name, string description, string image)
+        public Genre(int id, string name, string description, string imageUrl, bool Public, DateTime createdAt, DateTime? updatedAt)
         {
             Id = id;
             Name = name;
             Description = description;
-            Image = image;
-        }
-        public Genre(string name, string description, string image, List<Artist> artists)
-        {
-            Name = name;
-            Description = description;
-            Image = image;
-            Artists = artists;
+            ImageUrl = imageUrl;
+            this.Public = Public;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
-        public Genre(int id, string name, string description, string image, List<Artist> artists)
+        public Genre(int id, string name, string description, string imageUrl, bool Public, DateTime createdAt, DateTime? updatedAt, List<Artist> artists)
         {
             Id = id;
             Name = name;
             Description = description;
-            Image = image;
+            ImageUrl = imageUrl;
+            this.Public = Public;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
             Artists = artists;
         }
 
-        public override string ToString()
+        public Genre(int id, string name, string description, string imageUrl, bool Public, DateTime createdAt, DateTime? updatedAt, List<Song> songs)
         {
-            return Id + "   " + Name + "   " + Description + "   " + Image;
+            Id = id;
+            Name = name;
+            Description = description;
+            ImageUrl = imageUrl;
+            this.Public = Public;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Songs = songs;
+        }
+        public Genre(int id, string name, string description, string imageUrl, bool Public, DateTime createdAt, DateTime? updatedAt, List<Song> songs, List<Artist> artists)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            ImageUrl = imageUrl;
+            this.Public = Public;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Songs = songs;
+            Artists = artists;
+        }
+
+        public Genre()
+        {
+            
         }
     }
 }

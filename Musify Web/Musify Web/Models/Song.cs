@@ -8,41 +8,15 @@ namespace Musify_Web.Models
     public class Song
     {
         public int Id { get; private set; }
-        public string Duration { get; private set; }
-        public string SongUrl { get; private set; }
-        public DateTime CreatedAt { get; private set; }
-        public List<Playlist> Playlists { get; private set; }
-
-        public Song(string duration, string songUrl, DateTime createdAt)
-        {
-            Duration = duration;
-            SongUrl = songUrl;
-            CreatedAt = createdAt;
-        }
-
-        public Song(int id, string duration, string songUrl, DateTime createdAt)
-        {
-            Id = id;
-            Duration = duration;
-            SongUrl = songUrl;
-            CreatedAt = createdAt;
-        }
-
-        public Song(string duration, string songUrl, DateTime createdAt, List<Playlist> playlists)
-        {
-            Duration = duration;
-            SongUrl = songUrl;
-            CreatedAt = createdAt;
-            Playlists = playlists;
-        }
-
-        public Song(int id, string duration, string songUrl, DateTime createdAt, List<Playlist> playlists)
-        {
-            Id = id;
-            Duration = duration;
-            SongUrl = songUrl;
-            CreatedAt = createdAt;
-            Playlists = playlists;
-        }
+        public string Name { get; private set; }
+        public int Number { get; private set; }
+        public int Dutarion { get; private set; }
+        public string YoutubeUrl { get; private set; }
+        public string SoundcloudUrl { get; private set; }
+        public string ServerUrl { get; private set; }
+        public Album Album { get; private set; }
+        
+        // List
+        public List<Artist> Artists { get; set; }
     }
 }

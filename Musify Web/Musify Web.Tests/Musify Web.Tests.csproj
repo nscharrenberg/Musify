@@ -5,7 +5,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{48AD649A-E704-4C24-B92E-5AEB7B2927BC}</ProjectGuid>
+    <ProjectGuid>{ED799A1C-2FEC-4CC0-9407-D48679525879}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Musify_Web.Tests</RootNamespace>
@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Musify Web\Musify Web.csproj">
-      <Project>{8FCB1940-E0A4-4B14-A3B8-C12440FF8CC9}</Project>
+      <Project>{F28C968A-6253-4A28-B77F-E87B1F84CC6A}</Project>
       <Name>Musify Web</Name>
     </ProjectReference>
   </ItemGroup>
