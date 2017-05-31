@@ -13,6 +13,7 @@ namespace Musify_Web.Models
         // Connection String can be found in web.config.
         public const string connectionString = "Sql";
         private string _connectionString = string.Empty;
+        Exceptions eh = new Exceptions();
 
         public string Connectionstring
         {
@@ -37,41 +38,85 @@ namespace Musify_Web.Models
         public DataTable Execute(string query)
         {
             DataTable dt = new DataTable();
-            SqlCommand sqlcmd = GetSqlCommand(query);
-            sqlcmd.Connection.Open();
-            dt.Load(sqlcmd.ExecuteReader());
-            sqlcmd.Connection.Close();
+            SqlCommand sqlCmd = GetSqlCommand(query);
+            sqlCmd.Connection.Open();
+            try
+            {
+                dt.Load(sqlCmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+            }
+            finally
+            {
+                sqlCmd.Connection.Close();
+            }
 
-            return dt;
+            return null;
         }
 
         public DataTable Execute(SqlCommand sqlCmd)
         {
             DataTable dt = new DataTable();
             sqlCmd.Connection.Open();
-            dt.Load(sqlCmd.ExecuteReader());
-            sqlCmd.Connection.Close();
+            try
+            {
+                dt.Load(sqlCmd.ExecuteReader());
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+            }
+            finally
+            {
+                sqlCmd.Connection.Close();
+            }
 
-            return dt;
+            return null;
         }
 
         public int ExecuteNonQuery(string query)
         {
             SqlCommand sqlCmd = GetSqlCommand(query);
             sqlCmd.Connection.Open();
-            int results = sqlCmd.ExecuteNonQuery();
-            sqlCmd.Connection.Close();
+            try
+            {
+                int results = sqlCmd.ExecuteNonQuery();
+                return results;
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+            }
+            finally
+            {
+                sqlCmd.Connection.Close();
+            }
 
-            return results;
+            return 0;
         }
 
         public int ExecuteNonQuery(SqlCommand sqlCmd)
         {
             sqlCmd.Connection.Open();
-            int results = sqlCmd.ExecuteNonQuery();
-            sqlCmd.Connection.Close();
+            try
+            {
+                int results = sqlCmd.ExecuteNonQuery();
+                return results;
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+            }
+            finally
+            {
+                sqlCmd.Connection.Close();
+            }
 
-            return results;
+            return 0;
         }
     }
 }
