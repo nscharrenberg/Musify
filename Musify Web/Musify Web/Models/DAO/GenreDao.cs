@@ -22,6 +22,8 @@ namespace Musify_Web.Repository.DAO
             string query = "SELECT * FROM genre";
             DataTable dt = sqlDao.Execute(query);
 
+            
+
             foreach (DataRow dr in dt.Rows)
             {
                 int id = (int)dr["id"];
@@ -32,10 +34,37 @@ namespace Musify_Web.Repository.DAO
                 bool gpublic = Convert.ToBoolean(dr["public"].ToString());
                 DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
-                genres.Add(new Genre(id, name, description, image, gpublic, created, updated));
+
+                List <Artist> artists = GetGenreArtists(id);
+
+                genres.Add(new Genre(id, name, description, image, gpublic, created, updated, artists));
             }
 
             return genres;
+        }
+
+        public List<Artist> GetGenreArtists(int genreId)
+        {
+            List<Artist> artists = new List<Artist>();
+            string GenreArtists = "SELECT * FROM genre_artist AS ga INNER JOIN artist AS a ON a.id = ga.artist_id INNER JOIN genre AS g  ON  g.id = ga.genre_id AND g.id = @GenreId";
+            SqlCommand gaCommand = new SqlCommand(GenreArtists, conn);
+            gaCommand.Parameters.Add("@GenreId", SqlDbType.Int).Value = genreId;
+            DataTable dtGa = sqlDao.Execute(gaCommand);
+
+            foreach (DataRow drGa in dtGa.Rows)
+            {
+                int artistId = (int)drGa["id"];
+                string artistName = drGa["name"].ToString();
+                string artistBigImage = drGa["image_big_url"].ToString();
+                string artistSmallImage = drGa["image_small_url"].ToString();
+                string artistBio = drGa["BIO"].ToString();
+                DateTime artistCreated = Convert.ToDateTime(drGa["created_at"].ToString());
+                DateTime artistUpdated = Convert.ToDateTime(drGa["updated_at"].ToString());
+                
+                artists.Add(new Artist(artistId, artistName, artistBigImage, artistSmallImage, artistBio, artistCreated, artistUpdated));
+            }
+
+            return artists;
         }
 
         public Genre GetGenreById(int genreId)

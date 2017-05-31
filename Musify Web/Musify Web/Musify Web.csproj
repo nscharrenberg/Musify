@@ -141,6 +141,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -148,11 +149,14 @@
     </Compile>
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\DAO\ArtistDao.cs" />
     <Compile Include="Models\DAO\GenreDao.cs" />
     <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Interface\IArtistsContext.cs" />
     <Compile Include="Models\Interface\IGenreContext.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\Repository\ArtistRepository.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\SqlDataAccessObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,6 +176,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\clickableRow.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -182,6 +187,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tableSearchBar.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -205,6 +211,13 @@
     <Content Include="Views\Genres\Hide.cshtml" />
     <Content Include="Views\Genres\Show.cshtml" />
     <Content Include="Views\Genres\Create.cshtml" />
+    <Content Include="Views\Genres\Artists.cshtml" />
+    <Content Include="Views\Artists\Index.cshtml" />
+    <Content Include="Views\Artists\Details.cshtml" />
+    <Content Include="Views\Artists\Create.cshtml" />
+    <Content Include="Views\Artists\Edit.cshtml" />
+    <Content Include="Views\Artists\Delete.cshtml" />
+    <Content Include="Views\Artists\Genres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

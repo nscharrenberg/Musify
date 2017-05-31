@@ -6,47 +6,48 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Musify_Web.Models;
+using Musify_Web.Models.DAO;
+using Musify_Web.Models.Repository;
 using Musify_Web.Repository;
 using Musify_Web.Repository.DAO;
-using Musify_Web.Repository.Interface;
 
 namespace Musify_Web.Controllers
 {
-    public class GenresController : Controller
+    public class ArtistsController : Controller
     {
         static SqlDataAccessObject _SqlDAl = new SqlDataAccessObject();
         SqlConnection conn = new SqlConnection(_SqlDAl.Connectionstring);
-        static GenreDao genreDao = new GenreDao();
-        GenreRepository _gr = new GenreRepository(genreDao);
+        static ArtistDao artistDao = new ArtistDao();
+        private ArtistRepository _ar = new ArtistRepository(artistDao);
         Exceptions eh = new Exceptions();
-           
-        // GET: Genres
+
+        // GET: Artists
         public ActionResult Index()
         {
             try
             {
-                Genre[] genreList = _gr.GetAllGenres();
+                Artist[] artistList = _ar.GetAllArtists();
 
-                return View(genreList);
+                return View(artistList);
             }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
 
-        public ActionResult Artists(int id)
+        public ActionResult Genres(int id)
         {
             try
             {
-                Genre genre = _gr.GetGenreById(id);
-                if (genre == null)
+                Artist artist = _ar.GetArtistById(id);
+                if (artist == null)
                 {
                     return HttpNotFound();
                 }
 
-                return View(genre);
+                return View(artist);
             }
             catch (Exception ex)
             {
@@ -55,40 +56,26 @@ namespace Musify_Web.Controllers
             }
         }
 
-        // GET: Genres/Details/5
+        // GET: Artists/Details/5
         public ActionResult Details(int id)
         {
-            try
-            {
-                Genre genre = _gr.GetGenreById(id);
-                if (genre == null)
-                {
-                    return HttpNotFound();
-                }
-
-                return View(genre);
-            }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.Message);
-                return View();
-            }
+            return View();
         }
 
         // GET: Genres/Create
         public ActionResult Create()
         {
-            
-            return View(new Genre());
+
+            return View(new Artist());
         }
 
         // POST: Genres/Create
         [HttpPost]
-        public ActionResult Create(Genre genre)
+        public ActionResult Create(Artist artist)
         {
             try
             {
-                _gr.AddGenre(genre);
+                _ar.AddArtist(artist);
 
                 return RedirectToAction("Index");
             }
@@ -97,26 +84,21 @@ namespace Musify_Web.Controllers
                 eh.WriteToFile(ex.Message);
                 return View();
             }
-            
+
         }
 
-        // GET: Genres/Edit/5
+        // GET: Artists/Edit/5
         public ActionResult Edit(int id)
         {
             try
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
+                Artist artist = _ar.GetArtistById(id);
 
-                Genre genre = _gr.GetGenreById(id);
-
-                if (genre == null)
+                if (artist == null)
                 {
                     return HttpNotFound();
                 }
-                return View(genre);
+                return View(artist);
             }
             catch (Exception ex)
             {
@@ -125,13 +107,13 @@ namespace Musify_Web.Controllers
             }
         }
 
-        // POST: Genres/Edit/5
+        // POST: Artists/Edit/5
         [HttpPost]
-        public ActionResult Edit(Genre genre)
+        public ActionResult Edit(Artist artist)
         {
             try
             {
-                _gr.UpdateGenreById(genre);
+                _ar.UpdateArtistById(artist);
 
                 return RedirectToAction("Index");
             }
@@ -142,7 +124,7 @@ namespace Musify_Web.Controllers
             }
         }
 
-        // GET: Genres/Delete/5
+        // GET: Artists/Delete/5
         public ActionResult Delete(int id)
         {
             try
@@ -152,13 +134,14 @@ namespace Musify_Web.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                Genre genre = _gr.GetGenreById(id);
+                Artist artist = _ar.GetArtistById(id);
 
-                if (genre == null)
+                if (artist == null)
                 {
                     return HttpNotFound();
                 }
-                return View(genre);
+
+                return View(artist);
             }
             catch (Exception ex)
             {
@@ -167,18 +150,19 @@ namespace Musify_Web.Controllers
             }
         }
 
-        // POST: Genres/Delete/5
+        // POST: Artists/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                _gr.DeleteGenreById(id);
+                _ar.DeleteArtistById(id);
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message + id);
+                eh.WriteToFile(ex.Message);
                 return View();
             }
         }

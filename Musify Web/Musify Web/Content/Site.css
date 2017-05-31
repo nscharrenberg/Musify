@@ -3,22 +3,71 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
+
+table tr .clickable-row {
+    cursor: pointer;
+    color: #e95420;
+}
+
+.clickable-row {
+    text-decoration: none
+}
+
+    .clickable-row:hover, .clickable-row:focus {
+        cursor: pointer;
+        color: #e95420;
+    }
+
+    .clickable-row:focus {
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px
+    }
+
+#searchBar {
+    background-image: url('/css/searchicon.png'); 
+    background-position: 10px 12px; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    max-width: 100%;
+    font-size: 16px; 
+    padding: 12px 20px 12px 40px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+}
+
+#searchBar {
+    border-collapse: collapse; 
+    width: 100%; 
+    border: 1px solid #ddd; 
+    font-size: 18px; 
+}
+
+    #searchBar th, #searchBar td {
+        text-align: left; 
+        padding: 12px; 
+    }
+
+    #searchBar tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #searchBar tr.header, #searchBar tr:hover {
+       background-color: #f1f1f1;
+    }
+
+

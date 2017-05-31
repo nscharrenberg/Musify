@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/header")
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -22,6 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Genres", "Index", "Genres")</li>
+                    <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
                 </ul>
             </div>
         </div>
@@ -34,8 +37,9 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/footer")
     @RenderSection("scripts", required: false)
 </body>
 </html>

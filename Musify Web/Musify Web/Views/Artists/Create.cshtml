@@ -1,0 +1,59 @@
+﻿@model Musify_Web.Models.Artist
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" _lpchecked="1">
+        <fieldset>
+            <legend>Legend</legend>
+            <div class="form-group">
+                <label for="inputName" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "inputName", @placeholder = "Artist Name", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputDescription" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-10">
+
+                    @Html.TextAreaFor(model => model.Biography, new { @class = "form-control", @id = "inputDescription", @placeholder = "Artist Biography" })
+                    @Html.ValidationMessageFor(model => model.Biography)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputImageSmall" class="col-lg-2 control-label">Image URL</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.ImageSmallUrl, new { @class = "form-control", @id = "inputImageSmall", @placeholder = "Thumbnail of artist", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.ImageSmallUrl)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputImageBig" class="col-lg-2 control-label">Image URL</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.ImageBigUrl, new { @class = "form-control", @id = "inputImageBig", @placeholder = "Image of artist", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.ImageBigUrl)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+}
+
