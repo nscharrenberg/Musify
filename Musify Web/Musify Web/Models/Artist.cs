@@ -9,9 +9,13 @@ namespace Musify_Web.Models
     public class Artist
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string ImageBigUrl { get; set; }
+        [Required]
         public string ImageSmallUrl { get; set; }
+        [Required]
         [DataType(DataType.MultilineText)]
         public string Biography { get; set; }
         public DateTime CreatedAt { get; set; }

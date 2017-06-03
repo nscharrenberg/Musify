@@ -45,5 +45,20 @@ namespace Musify_Web.Models.Repository
         {
             return context.UpdateArtistById(artist);
         }
+
+        public Artist SetUpdateTimeForArtistById(Artist artist)
+        {
+            return context.SetUpdateTimeForArtistById(artist);
+        }
+
+        public void AddGenreToArtist(int artist, int genre)
+        {
+            context.AddGenreToArtist(artist, genre);
+        }
+
+        public void RemoveGenreFromArtist(int artist, int genre)
+        {
+            context.RemoveGenreFromArtist(artist, genre);
+        }
     }
 }

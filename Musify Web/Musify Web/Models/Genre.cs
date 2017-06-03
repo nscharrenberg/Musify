@@ -9,9 +9,12 @@ namespace Musify_Web.Models
     public class Genre
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [Required]
         public string ImageUrl { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get;  set; }

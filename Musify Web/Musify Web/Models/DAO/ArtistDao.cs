@@ -4,7 +4,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Musify_Web.Models.Interface;
+using Musify_Web.Repository;
+using Musify_Web.Repository.DAO;
 
 namespace Musify_Web.Models.DAO
 {
@@ -12,6 +15,9 @@ namespace Musify_Web.Models.DAO
     {
         static SqlDataAccessObject sqlDao = new SqlDataAccessObject();
         SqlConnection conn = new SqlConnection(sqlDao.Connectionstring);
+
+        static GenreDao genreDao = new GenreDao();
+        GenreRepository _gr = new GenreRepository(genreDao);
 
         public List<Artist> GetAllArtists()
         {
@@ -115,6 +121,39 @@ namespace Musify_Web.Models.DAO
             sqlDao.ExecuteNonQuery(command);
 
             return artist;
+        }
+
+        public Artist SetUpdateTimeForArtistById(Artist artist)
+        {
+            string query =
+                "UPDATE [artist] SET updated_at = @updated WHERE id = @id";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@id", SqlDbType.Int).Value = artist.Id;
+            command.Parameters.Add("@updated", SqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            sqlDao.ExecuteNonQuery(command);
+
+            return artist;
+        }
+
+        public void AddGenreToArtist(int artist, int genre)
+        {
+            string query =
+                "INSERT INTO [genre_artist] (genre_id, artist_id, created_at) VALUES(@genre, @artist, @created)";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@genre", SqlDbType.Int).Value = genre;
+            command.Parameters.Add("@artist", SqlDbType.Int).Value = artist;
+            command.Parameters.Add("@created", SqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+            sqlDao.ExecuteNonQuery(command);
+        }
+
+        public void RemoveGenreFromArtist(int artist, int genre)
+        {
+            string query = "DELETE FROM [genre_artist] WHERE genre_id = @genre AND artist_id = @artist";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.AddWithValue("@genre", SqlDbType.Int).Value = genre;
+            command.Parameters.Add("@artist", SqlDbType.Int).Value = artist;
+            sqlDao.ExecuteNonQuery(command);
         }
     }
 }

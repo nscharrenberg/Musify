@@ -1,0 +1,23 @@
+﻿@model Musify_Web.Models.ViewModel.ArtistGenreViewModel
+
+<h3>Are you sure you want to delete @Model.Genre.Name from @Model.Artist.Name?</h3>
+
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block">Delete @Model.Genre.Name from @Model.Artist.Name</button>
+                </div>
+            </div>
+            
+        </div>
+            
+    }
+

@@ -21,6 +21,7 @@ namespace Musify_Web.Controllers
         Exceptions eh = new Exceptions();
            
         // GET: Genres
+        [Route("admin/Genres/Index")]
         public ActionResult Index()
         {
             try
@@ -36,6 +37,7 @@ namespace Musify_Web.Controllers
             }
         }
 
+        [Route("admin/Genres/Details/{id}")]
         public ActionResult Artists(int id)
         {
             try
@@ -55,27 +57,8 @@ namespace Musify_Web.Controllers
             }
         }
 
-        // GET: Genres/Details/5
-        public ActionResult Details(int id)
-        {
-            try
-            {
-                Genre genre = _gr.GetGenreById(id);
-                if (genre == null)
-                {
-                    return HttpNotFound();
-                }
-
-                return View(genre);
-            }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.Message);
-                return View();
-            }
-        }
-
         // GET: Genres/Create
+        [Route("admin/Genres/Create")]
         public ActionResult Create()
         {
             
@@ -83,6 +66,7 @@ namespace Musify_Web.Controllers
         }
 
         // POST: Genres/Create
+        [Route("admin/Genres/Create")]
         [HttpPost]
         public ActionResult Create(Genre genre)
         {
@@ -101,6 +85,7 @@ namespace Musify_Web.Controllers
         }
 
         // GET: Genres/Edit/5
+        [Route("admin/Genres/Edit/{id}")]
         public ActionResult Edit(int id)
         {
             try
@@ -126,6 +111,7 @@ namespace Musify_Web.Controllers
         }
 
         // POST: Genres/Edit/5
+        [Route("admin/Genres/Edit/{id}")]
         [HttpPost]
         public ActionResult Edit(Genre genre)
         {
@@ -143,6 +129,7 @@ namespace Musify_Web.Controllers
         }
 
         // GET: Genres/Delete/5
+        [Route("admin/Genres/Delete/{id}")]
         public ActionResult Delete(int id)
         {
             try
@@ -168,6 +155,7 @@ namespace Musify_Web.Controllers
         }
 
         // POST: Genres/Delete/5
+        [Route("admin/Genres/Delete/{id}")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

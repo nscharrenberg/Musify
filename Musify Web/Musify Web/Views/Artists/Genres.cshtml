@@ -9,6 +9,11 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
+            <a class="btn btn-primary btn-block btn-lg" href="@Url.Action("AddGenres", "Artists")">Add new Genre to @Model.Name</a>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
             <input type="text" id="searchBar" onkeyup="searchItem()" placeholder="Search for the Artists Genre..">
         </div>
     </div>
@@ -29,6 +34,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Description)</td>
                     <td>@Html.DisplayFor(modelItem => item.ImageUrl)</td>
+                    <td><a class="btn btn-danger" href="@Url.Action("DeleteGenreFromArtist", "Artists", new { artistId = Model.Id, genreId = item.Id })">Delete</a></td>
                 </tr>
             }
 
