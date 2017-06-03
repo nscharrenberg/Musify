@@ -70,4 +70,8 @@ table tr .clickable-row {
        background-color: #f1f1f1;
     }
 
+.bootstrap-select > .dropdown-toggle.bs-placeholder, .bootstrap-select > .dropdown-toggle.bs-placeholder:hover, .bootstrap-select > .dropdown-toggle.bs-placeholder:focus, .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+    color: #fff;
+}
+
 
