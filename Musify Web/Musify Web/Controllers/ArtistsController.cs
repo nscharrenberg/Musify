@@ -136,10 +136,6 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
 
                 Artist artist = _ar.GetArtistById(id);
 
@@ -225,10 +221,6 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                if (artistId == null || genreId == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
 
                 ArtistGenreViewModel agvm = new ArtistGenreViewModel()
                 {
@@ -268,9 +260,25 @@ namespace Musify_Web.Controllers
             }
         }
 
+        [Route("admin/Artists/Albums/{id}")]
+        public ActionResult Albums(int id)
+        {
+            try
+            {
+                Artist artist = _ar.GetArtistById(id);
+                if (artist == null)
+                {
+                    return HttpNotFound();
+                }
 
-
-
+                return View(artist);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
 
     }
 }

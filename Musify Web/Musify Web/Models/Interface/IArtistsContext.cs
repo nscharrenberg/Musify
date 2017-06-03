@@ -18,6 +18,7 @@ namespace Musify_Web.Models.Interface
         Artist SetUpdateTimeForArtistById(Artist artist);
         void AddGenreToArtist(int artist, int genre);
         void RemoveGenreFromArtist(int artist, int genre);
+        List<Album> GetAlbumArtists(int id);
 
     }
 }

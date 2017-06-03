@@ -36,8 +36,10 @@ namespace Musify_Web.Models.DAO
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
 
                 List<Genre> genres = GetGenreArtists(id);
+                List<Album> albums = GetAlbumArtists(id);
 
-                artists.Add(new Artist(id, name, imageBig, imageSmall, biography, created, updated, genres));
+
+                artists.Add(new Artist(id, name, imageBig, imageSmall, biography, created, updated, genres, albums));
             }
 
             return artists;
@@ -57,7 +59,6 @@ namespace Musify_Web.Models.DAO
                 string name = dr["name"].ToString();
                 string description = dr["description"].ToString();
                 string image = dr["image_url"].ToString();
-                string date = dr["created_at"].ToString();
                 bool gpublic = Convert.ToBoolean(dr["public"].ToString());
                 DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
@@ -66,6 +67,30 @@ namespace Musify_Web.Models.DAO
             }
 
             return genres;
+        }
+
+        public List<Album> GetAlbumArtists(int id)
+        {
+            List<Album> albums = new List<Album>();
+            string AlbumArtists = "SELECT * FROM album AS alb INNER JOIN artist AS art ON art.id = alb.artist_id AND art.id = @artistId";
+            SqlCommand command = new SqlCommand(AlbumArtists, conn);
+            command.Parameters.Add("@artistId", SqlDbType.Int).Value = id;
+            DataTable dt = sqlDao.Execute(command);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                int albumId = (int)dr["id"];
+                string name = dr["name"].ToString();
+                DateTime release = Convert.ToDateTime(dr["release_date"].ToString());
+                string imageBig = dr["image_big_url"].ToString();
+                string imageSmall = dr["image_small_url"].ToString();
+                DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
+                DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
+
+                albums.Add(new Album(albumId, name, release, imageBig, imageSmall, created, updated));
+            }
+
+            return albums;
         }
 
         public Artist GetArtistById(int artistId)

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Musify_Web.Models.Interface
 {
-    interface IAlbumInterface
+    public interface IAlbumContext
     {
+        List<Album> GetAllAlbums();
     }
 }

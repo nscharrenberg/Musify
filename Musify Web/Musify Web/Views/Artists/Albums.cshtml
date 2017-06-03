@@ -1,23 +1,17 @@
 ﻿@model Musify_Web.Models.Artist
 
 @{
-    ViewBag.Title = "Genres";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Albums";
+    Layout = null;
 }
+
+<h2>Albums</h2>
 
 
 <div class="row">
-    <h1>@Html.DisplayFor(model => model.Name) <a class="btn btn-warning" href="@Url.Action("Edit", "Artists")">Edit</a></h1> 
-    
-
-    @Html.Partial("Albums")
-
-
-    <hr/>
-    <h2>Genres</h2>
     <div class="col-lg-12">
         <div class="form-group">
-            <a class="btn btn-primary btn-block btn-lg" href="@Url.Action("AddGenres", "Artists")">Add new Genre to @Model.Name</a>
+            <a class="btn btn-primary btn-block btn-lg" href="@Url.Action("AddGenres", "Artists")">Add new Album to @Model.Name</a>
         </div>
     </div>
     <div class="col-lg-12">
@@ -36,13 +30,13 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model.Genres)
+            @foreach (var item in Model.Albums)
             {
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ImageUrl)</td>
-                    <td><a class="btn btn-danger" href="@Url.Action("DeleteGenreFromArtist", "Artists", new {artistId = Model.Id, genreId = item.Id})">Delete</a></td>
+                    <td>@Html.DisplayFor(modelItem => item.ReleaseDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ImageBigUrl)</td>
+                    <td><a class="btn btn-danger" href="@Url.Action("DeleteGenreFromArtist", "Artists", new { artistId = Model.Id, genreId = item.Id })">Delete</a></td>
                 </tr>
             }
 
@@ -56,3 +50,5 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Musify_Web.Models;
+using Musify_Web.Models.DAO;
+using Musify_Web.Models.Repository;
 
 namespace Musify_Web.Controllers
 {
     public class AlbumController : Controller
     {
+        static SqlDataAccessObject sqlDao = new SqlDataAccessObject();
+        SqlConnection conn = new SqlConnection(sqlDao.Connectionstring);
+
+        static AlbumDao _albumDao = new AlbumDao();
+        private AlbumRepository _albr = new AlbumRepository(_albumDao);
+
+        Exceptions eh = new Exceptions();
+
         // GET: Album
+        [Route("admin/Albums")]
         public ActionResult AllAlbums()
         {
-            return View();
+            return View(_albr.GetAllAlbums());
         }
 
         // GET: Album/Details/5

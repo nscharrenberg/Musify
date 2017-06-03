@@ -90,11 +90,6 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
                 Genre genre = _gr.GetGenreById(id);
 
                 if (genre == null)
@@ -134,11 +129,6 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-
                 Genre genre = _gr.GetGenreById(id);
 
                 if (genre == null)

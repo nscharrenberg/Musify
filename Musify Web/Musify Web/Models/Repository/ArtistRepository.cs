@@ -60,5 +60,10 @@ namespace Musify_Web.Models.Repository
         {
             context.RemoveGenreFromArtist(artist, genre);
         }
+
+        public List<Album> GetAlbumArtists(int id)
+        {
+            return context.GetAlbumArtists(id);
+        }
     }
 }

@@ -150,16 +150,20 @@
     </Compile>
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\DAO\AlbumDao.cs" />
     <Compile Include="Models\DAO\ArtistDao.cs" />
     <Compile Include="Models\DAO\GenreDao.cs" />
     <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Interface\IAlbumContext.cs" />
     <Compile Include="Models\Interface\IArtistsContext.cs" />
     <Compile Include="Models\Interface\IGenreContext.cs" />
     <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\Repository\AlbumRepository.cs" />
     <Compile Include="Models\Repository\ArtistRepository.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\SqlDataAccessObject.cs" />
+    <Compile Include="Models\ViewModel\ArtistAlbumViewModel.cs" />
     <Compile Include="Models\ViewModel\ArtistGenreViewModel.cs" />
     <Compile Include="Models\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,6 +232,8 @@
     <Content Include="Views\Artists\AddGenres.cshtml" />
     <Content Include="Views\Artists\DeleteGenreFromArtist.cshtml" />
     <Content Include="Views\Album\AllAlbums.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Artists\Albums.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
