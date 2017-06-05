@@ -39,20 +39,29 @@ namespace Musify_Web.Models
         {
             DataTable dt = new DataTable();
             SqlCommand sqlCmd = GetSqlCommand(query);
-            sqlCmd.Connection.Open();
-            try
+            if (sqlCmd.Connection != null && sqlCmd.Connection.State == ConnectionState.Closed)
             {
-                dt.Load(sqlCmd.ExecuteReader());
-                return dt;
+                try
+                {
+                    sqlCmd.Connection.Open();
+                    dt.Load(sqlCmd.ExecuteReader());
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    eh.WriteToFile(ex.ToString());
+                }
+                finally
+                {
+                    sqlCmd.Connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.ToString());
-            }
-            finally
+            else if (sqlCmd.Connection != null && sqlCmd.Connection.State != ConnectionState.Closed)
             {
                 sqlCmd.Connection.Close();
             }
+                
+            
 
             return null;
         }
@@ -60,61 +69,88 @@ namespace Musify_Web.Models
         public DataTable Execute(SqlCommand sqlCmd)
         {
             DataTable dt = new DataTable();
-            sqlCmd.Connection.Open();
-            try
+            if (sqlCmd.Connection != null && sqlCmd.Connection.State == ConnectionState.Closed)
             {
-                dt.Load(sqlCmd.ExecuteReader());
-                return dt;
+                sqlCmd.Connection.Open();
+                try
+                {
+                    dt.Load(sqlCmd.ExecuteReader());
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    eh.WriteToFile(ex.ToString());
+                }
+                finally
+                {
+                    sqlCmd.Connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.ToString());
-            }
-            finally
+            else if (sqlCmd.Connection != null && sqlCmd.Connection.State != ConnectionState.Closed)
             {
                 sqlCmd.Connection.Close();
             }
+            
 
             return null;
         }
 
         public int ExecuteNonQuery(string query)
         {
+
             SqlCommand sqlCmd = GetSqlCommand(query);
-            sqlCmd.Connection.Open();
-            try
+
+            if (sqlCmd.Connection != null && sqlCmd.Connection.State == ConnectionState.Closed)
             {
-                int results = sqlCmd.ExecuteNonQuery();
-                return results;
+                sqlCmd.Connection.Open();
+                try
+                {
+                    int results = sqlCmd.ExecuteNonQuery();
+                    return results;
+                }
+                catch (Exception ex)
+                {
+                    eh.WriteToFile(ex.ToString());
+                }
+                finally
+                {
+                    sqlCmd.Connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.ToString());
-            }
-            finally
+            else if (sqlCmd.Connection != null && sqlCmd.Connection.State != ConnectionState.Closed)
             {
                 sqlCmd.Connection.Close();
             }
+            
 
             return 0;
         }
 
         public int ExecuteNonQuery(SqlCommand sqlCmd)
         {
-            sqlCmd.Connection.Open();
-            try
+
+            if (sqlCmd.Connection != null && sqlCmd.Connection.State == ConnectionState.Closed)
             {
-                int results = sqlCmd.ExecuteNonQuery();
-                return results;
+                sqlCmd.Connection.Open();
+                try
+                {
+                    int results = sqlCmd.ExecuteNonQuery();
+                    return results;
+                }
+                catch (Exception ex)
+                {
+                    eh.WriteToFile(ex.ToString());
+                }
+                finally
+                {
+                    sqlCmd.Connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                eh.WriteToFile(ex.ToString());
-            }
-            finally
+            else if (sqlCmd.Connection != null && sqlCmd.Connection.State != ConnectionState.Closed)
             {
                 sqlCmd.Connection.Close();
             }
+            
 
             return 0;
         }

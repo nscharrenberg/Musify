@@ -9,5 +9,10 @@ namespace Musify_Web.Models.Interface
     public interface IAlbumContext
     {
         List<Album> GetAllAlbums();
+        Album GetAlbumById(int albumId);
+        void AddAlbum(Album album);
+        void DeleteAlbumById(int albumId);
+        Album UpdateAlbumById(Album album);
+        List<Song> GetSongAlbums(int id);
     }
 }

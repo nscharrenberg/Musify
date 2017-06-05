@@ -119,7 +119,6 @@ namespace Musify_Web.Controllers
             try
             {
                 _ar.UpdateArtistById(artist);
-                _ar.UpdateArtistById(artist);
 
                 return RedirectToAction("Index");
             }

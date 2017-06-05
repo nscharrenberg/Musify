@@ -19,5 +19,30 @@ namespace Musify_Web.Models.Repository
         {
             return context.GetAllAlbums();
         }
+
+        public Album GetAlbumById(int albumId)
+        {
+            return context.GetAlbumById(albumId);
+        }
+
+        public void AddAlbum(Album album)
+        {
+            context.AddAlbum(album);
+        }
+
+        public void DeleteAlbumById(int albumId)
+        {
+            context.DeleteAlbumById(albumId);
+        }
+
+        public Album UpdateAlbumById(Album album)
+        {
+            return context.UpdateAlbumById(album);
+        }
+
+        public List<Song> GetSongAlbums(int id)
+        {
+            return context.GetSongAlbums(id);
+        }
     }
 }

@@ -9,10 +9,15 @@ namespace Musify_Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
-                "~/Scripts/clickableRow.js"));
+                "~/Scripts/clickableRow.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/footer").Include(
-                "~/Scripts/tableSearchBar.js"));
+                "~/Scripts/tableSearchBar.js",
+                "~/Scripts/moment.js",
+                "~/Scripts/bootstrap-datetimepicker.min.js",
+                "~/Scripts/datePickerForm.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
@@ -33,6 +38,7 @@ namespace Musify_Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",
+                      "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/united.css",
                       "~/Content/Site.css"));
         }
