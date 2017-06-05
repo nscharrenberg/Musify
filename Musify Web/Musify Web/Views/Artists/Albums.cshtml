@@ -36,8 +36,8 @@
                     <td class="clickable-row" data-href="@Url.Action("Songs", "Album", new {id = item.Id})">@Html.DisplayFor(modelItem => item.Name)</td>
                     <td class="clickable-row" data-href="@Url.Action("Songs", "Album", new {id = item.Id})">@Html.DisplayFor(modelItem => item.ReleaseDate)</td>
                     <td class="clickable-row" data-href="@Url.Action("Songs", "Album", new {id = item.Id})">@Html.DisplayFor(modelItem => item.ImageBigUrl)</td>
-                    <td><a class="btn btn-warning" href="@Url.Action("Edit", "Album", new { artistId = Model.Id, albumId = item.Id })">Edit</a></td>
-                    <td><a class="btn btn-danger" href="@Url.Action("Delete", "Album", new { artistId = Model.Id, albumId = item.Id })">Delete</a></td>
+                    <td><a class="btn btn-warning" href="@Url.Action("Edit", "Album", new {artistId = Model.Id, albumId = item.Id})">Edit</a></td>
+                    <td><a class="btn btn-danger" href="@Url.Action("Delete", "Album", new {artistId = Model.Id, albumId = item.Id})">Delete</a></td>
                 </tr>
             }
 

@@ -40,7 +40,7 @@ namespace Musify_Web.Models.DAO
                 DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
 
-                Album album = _albr.GetAlbumById(3);
+                Album album = _albr.GetAlbumById(albumId);
                 List<Artist> artists = new List<Artist>();
                 Artist artist = _artr.GetArtistById(artistId);
                 artists.Add(artist);

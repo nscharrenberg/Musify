@@ -18,38 +18,7 @@ namespace Musify_Web.Models
         public Artist Artist { get; set; }
         public List<Song> Songs { get; set; }
 
-        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, Artist artist, DateTime createdAt, DateTime updatedAt, List<Song> songs)
-        {
-            Name = name;
-            ReleaseDate = releaseDate;
-            ImageBigUrl = imageBigUrl;
-            ImageSmallUrl = imageSmallUrl;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            Artist = artist;
-            Songs = songs;
-        }
 
-        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, Artist artist, DateTime createdAt, DateTime updatedAt)
-        {
-            Name = name;
-            ReleaseDate = releaseDate;
-            ImageBigUrl = imageBigUrl;
-            ImageSmallUrl = imageSmallUrl;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-            Artist = artist;
-        }
-
-        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, DateTime createdAt, DateTime updatedAt)
-        {
-            Name = name;
-            ReleaseDate = releaseDate;
-            ImageBigUrl = imageBigUrl;
-            ImageSmallUrl = imageSmallUrl;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
-        }
 
         public Album(int id, string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, Artist artist , DateTime createdAt, DateTime updatedAt, List<Song> songs)
         {
@@ -87,7 +56,39 @@ namespace Musify_Web.Models
             UpdatedAt = updatedAt;
         }
 
-        
+        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, Artist artist, DateTime createdAt, DateTime updatedAt, List<Song> songs)
+        {
+            Name = name;
+            ReleaseDate = releaseDate;
+            ImageBigUrl = imageBigUrl;
+            ImageSmallUrl = imageSmallUrl;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Artist = artist;
+            Songs = songs;
+        }
+
+        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, Artist artist, DateTime createdAt, DateTime updatedAt)
+        {
+            Name = name;
+            ReleaseDate = releaseDate;
+            ImageBigUrl = imageBigUrl;
+            ImageSmallUrl = imageSmallUrl;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Artist = artist;
+        }
+
+        public Album(string name, DateTime releaseDate, string imageBigUrl, string imageSmallUrl, DateTime createdAt, DateTime updatedAt)
+        {
+            Name = name;
+            ReleaseDate = releaseDate;
+            ImageBigUrl = imageBigUrl;
+            ImageSmallUrl = imageSmallUrl;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+        }
+
 
         public Album()
         {

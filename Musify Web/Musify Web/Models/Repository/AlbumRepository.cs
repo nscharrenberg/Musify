@@ -15,9 +15,9 @@ namespace Musify_Web.Models.Repository
             this.context = context;
         }
 
-        public List<Album> GetAllAlbums()
+        public Album[] GetAllAlbums()
         {
-            return context.GetAllAlbums();
+            return context.GetAllAlbums().ToArray();
         }
 
         public Album GetAlbumById(int albumId)

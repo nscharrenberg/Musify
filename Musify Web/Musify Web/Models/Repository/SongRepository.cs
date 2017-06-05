@@ -15,9 +15,9 @@ namespace Musify_Web.Models.Repository
             this.context = context;
         }
 
-        public List<Song> GetAllSongs()
+        public Song[] GetAllSongs()
         {
-            return context.GetAllSongs();
+            return context.GetAllSongs().ToArray();
         }
 
         public Song GetSongById(int songId)

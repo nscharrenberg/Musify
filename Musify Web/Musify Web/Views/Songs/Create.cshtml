@@ -1,0 +1,71 @@
+﻿@model Musify_Web.Models.Song
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" _lpchecked="1">
+        <fieldset>
+            <legend>Legend</legend>
+            <div class="form-group">
+                <label for="inputName" class="col-lg-2 control-label">Song Name</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "inputName", @placeholder = "Album Name" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-lg-2 control-label">Position on Album</label>
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(model => model.Number, new { @class = "form-control", @id = "inputName", @placeholder = "Song Name" })
+                    @Html.ValidationMessageFor(model => model.Number)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSeconds" class="col-lg-2 control-label">Song Length</label>
+                <div class="col-lg-10">
+                    
+                    @Html.TextBoxFor(model => model.Duration, new { @class = "form-control", @id = "inputSeconds", @placeholder = "Song Length", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.Duration)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputServer" class="col-lg-2 control-label">Server Link</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.ServerUrl, new { @class = "form-control", @id = "inputServer", @placeholder = "Set Server Link", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.ServerUrl)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputYoutube" class="col-lg-2 control-label">Youtube Link</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.YoutubeUrl, new { @class = "form-control", @id = "inputYoutube", @placeholder = "Set Youtube Link", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.YoutubeUrl)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputSoundCloud" class="col-lg-2 control-label">Soundcloud Link</label>
+                <div class="col-lg-10">
+
+                    @Html.TextBoxFor(model => model.SoundcloudUrl, new { @class = "form-control", @id = "inputSoundCloud", @placeholder = "Set Soundcloud Link", @type = "text" })
+                    @Html.ValidationMessageFor(model => model.SoundcloudUrl)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}
+

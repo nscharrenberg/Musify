@@ -35,5 +35,62 @@ namespace Musify_Web.Models
             Updated = updated;
             Artists = artists;
         }
+
+        public Song(int id, string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, DateTime created, DateTime updated, List<Artist> artists)
+        {
+            Id = id;
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            ServerUrl = serverUrl;
+            Created = created;
+            Updated = updated;
+            Artists = artists;
+        }
+
+        public Song(string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, DateTime created, DateTime updated, List<Artist> artists)
+        {
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            ServerUrl = serverUrl;
+            Created = created;
+            Updated = updated;
+            Artists = artists;
+        }
+
+        public Song(string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, DateTime created, DateTime updated)
+        {
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            ServerUrl = serverUrl;
+            Created = created;
+            Updated = updated;
+        }
+
+        public Song(string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, Album album, DateTime created, DateTime updated)
+        {
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            ServerUrl = serverUrl;
+            Album = album;
+            Created = created;
+            Updated = updated;
+        }
+
+        public Song()
+        {
+            
+        }
     }
 }

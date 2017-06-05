@@ -28,7 +28,18 @@ namespace Musify_Web.Controllers
         [Route("admin/Albums")]
         public ActionResult AllAlbums()
         {
-            return View(_albr.GetAllAlbums());
+
+            try
+            {
+                Album[] albumList = _albr.GetAllAlbums();
+                return View(albumList);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
+
         }
 
         // GET: Album/Details/5

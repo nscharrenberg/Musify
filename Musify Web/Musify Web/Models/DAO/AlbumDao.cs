@@ -29,7 +29,7 @@ namespace Musify_Web.Models.DAO
 
             foreach (DataRow dr in dt.Rows)
             {
-                int id = (int) dr["id"];
+                int id = (int)dr["id"];
                 string name = dr["name"].ToString();
                 DateTime release = Convert.ToDateTime(dr["release_date"].ToString());
                 string imageBig = dr["image_big_url"].ToString();
@@ -37,7 +37,6 @@ namespace Musify_Web.Models.DAO
                 int artistId = (int) dr["artist_id"];
                 DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
-
 
                 Artist artist = _artr.GetArtistById(artistId);
                 List<Song> songs = GetSongAlbums(id);
@@ -47,6 +46,8 @@ namespace Musify_Web.Models.DAO
 
             return albums;
         }
+
+
 
         public Album GetAlbumById(int albumId)
         {
@@ -121,30 +122,32 @@ namespace Musify_Web.Models.DAO
                 string name = dr["name"].ToString();
                 int number = (int)dr["number"];
                 int duration = (int)dr["duration"];
-
                 string youtube = dr["youtube_url"].ToString();
-                if (youtube == "")
-                {
-                    youtube = "empty";
-                }
-                
                 string soundcloud = dr["soundcloud_url"].ToString();
-                if (soundcloud == "")
-                {
-                    soundcloud = "empty";
-
-                }
                 string server = dr["server_url"].ToString();
                 int albumId = (int)dr["album_id"];
                 int artistId = (int)dr["album_artist_id"];
                 DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                 DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
 
-                Album album = GetAlbumById(albumId);
-                Artist mainArtist = album.Artist;
                 List<Artist> artists = new List<Artist>();
+                Artist artist = _artr.GetArtistById(artistId);
+                artists.Add(artist);
 
-                songs.Add(new Song(songId, name, number, duration, youtube, soundcloud,server, album, created, updated, artists));
+                string queryFeatured = "SELECT * FROM featured WHERE song_id = @Id";
+                SqlCommand commandF = new SqlCommand(queryFeatured, conn);
+                commandF.Parameters.Add("@Id", SqlDbType.Int).Value = songId;
+
+                DataTable dtF = sqlDao.Execute(commandF);
+
+                foreach (DataRow drF in dtF.Rows)
+                {
+                    int featuredId = (int)drF["artist_id"];
+                    Artist featured = _artr.GetArtistById(featuredId);
+                    artists.Add(featured);
+                }
+
+                songs.Add(new Song(songId, name, number, duration, youtube, soundcloud, server, created, updated, artists));
             }
 
             return songs;
