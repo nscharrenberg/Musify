@@ -40,5 +40,10 @@ namespace Musify_Web.Models.Repository
             return context.UpdatesongById(song);
         }
 
+        public Song GetSongByIdAndAlbum(int albumId, int songId)
+        {
+            return context.GetSongByIdAndAlbum(albumId, songId);
+        }
+
     }
 }

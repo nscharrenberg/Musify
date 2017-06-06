@@ -79,6 +79,21 @@ namespace Musify_Web.Models.DAO
             return null;
         }
 
+        public Song GetSongByIdAndAlbum(int albumId, int songId)
+        {
+            List<Song> songs = _albr.GetSongAlbums(albumId);
+
+            foreach (var song in songs)
+            {
+                if (song.Id == songId)
+                {
+                    return song;
+                }
+            }
+
+            return null;
+        }
+
         public void Addsong(Song song)
         {
             string query =

@@ -14,5 +14,6 @@ namespace Musify_Web.Models.Interface
         void DeleteAlbumById(int albumId);
         Album UpdateAlbumById(Album album);
         List<Song> GetSongAlbums(int id);
+        List<Album> GetAlbumsByArtist(int selectedArtist);
     }
 }

@@ -81,42 +81,79 @@ namespace Musify_Web.Controllers
         }
 
         // GET: Songs/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Songs/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Route("admin/Albums/{albumId}/Songs/Edit/{songId}")]
+        public ActionResult Edit(int albumId, int songId)
         {
             try
             {
-                // TODO: Add update logic here
+                Song song = _sr.GetSongById(songId);
+                eh.WriteToFile(song.Id + " " + song.Name + song.Album.Id + " " + albumId);
 
-                return RedirectToAction("Index");
+                if (song == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(song);
             }
-            catch
+            catch (Exception ex)
             {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
+
+        // POST: Songs/Edit/5
+        [Route("admin/Albums/{albumId}/Songs/Edit/{songId}")]
+        [HttpPost]
+        public ActionResult Edit(Song song)
+        {
+            try
+            {
+                _sr.UpdatesongById(song);
+
+                return RedirectToAction("Songs", "Album", new { id = song.Album.Id });
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
 
         // GET: Songs/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Songs/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Route("admin/Albums/{albumId}/Songs/Delete/{songId}")]
+        public ActionResult Delete(int albumId, int songId)
         {
             try
             {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                Song song = _sr.GetSongById(songId);
+
+                if (song == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(song);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
+
+        // POST: Songs/Delete/5
+        [Route("admin/Albums/{albumId}/Songs/Delete/{songId}")]
+        [HttpPost]
+        public ActionResult Delete(int albumId, int songId, FormCollection collection)
+        {
+            try
+            {
+                _sr.DeleteSongById(songId);
+
+                return RedirectToAction("Songs", "Album", new { id = albumId });
             }
             catch
             {

@@ -13,5 +13,6 @@ namespace Musify_Web.Models.Interface
         void Addsong(Song song);
         void DeleteSongById(int songId);
         Song UpdatesongById(Song song);
+        Song GetSongByIdAndAlbum(int albumId, int songId);
     }
 }

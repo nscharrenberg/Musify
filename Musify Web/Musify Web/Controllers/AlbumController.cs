@@ -174,7 +174,7 @@ namespace Musify_Web.Controllers
             }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }

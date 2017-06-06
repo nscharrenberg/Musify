@@ -25,9 +25,9 @@
             @foreach (var item in Model.Artists)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ImageBigUrl)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Biography)</td>
+                    <td class="clickable-row" data-href="@Url.Action("Genres", "Artists", new {id = item.Id})">@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td class="clickable-row" data-href="@Url.Action("Genres", "Artists", new {id = item.Id})">@Html.DisplayFor(modelItem => item.ImageBigUrl)</td>
+                    <td class="clickable-row" data-href="@Url.Action("Genres", "Artists", new {id = item.Id})">@Html.DisplayFor(modelItem => item.Biography)</td>
                 </tr>
             }
 
