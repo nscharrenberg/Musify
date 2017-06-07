@@ -49,5 +49,10 @@ namespace Musify_Web.Models.Repository
         {
             return context.GetAlbumsByArtist(selectedArtist);
         }
+
+        public Album GetAlbumQueryById(int albumId)
+        {
+            return context.GetAlbumQueryById(albumId);
+        }
     }
 }

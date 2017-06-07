@@ -36,6 +36,20 @@ namespace Musify_Web.Models
             Artists = artists;
         }
 
+        public Song(int id, string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, Album album, DateTime created, DateTime updated)
+        {
+            Id = id;
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            Album = album;
+            ServerUrl = serverUrl;
+            Created = created;
+            Updated = updated;
+        }
+
         public Song(int id, string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, DateTime created, DateTime updated, List<Artist> artists)
         {
             Id = id;

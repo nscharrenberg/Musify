@@ -43,6 +43,26 @@ namespace Musify_Web.Controllers
             }
         }
 
+        [Route("Genres/Details/{id}")]
+        public ActionResult ClientArtists(int id)
+        {
+            try
+            {
+                Genre genre = _gr.GetGenreById(id);
+                if (genre == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(genre);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
+
         [Route("admin/Artists/Details/{id}")]
         public ActionResult Genres(int id)
         {

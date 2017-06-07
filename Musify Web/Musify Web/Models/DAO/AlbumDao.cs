@@ -92,6 +92,34 @@ namespace Musify_Web.Models.DAO
             return null;
         }
 
+        public Album GetAlbumQueryById(int albumId)
+        {
+            string query = "SELECT * FROM album WHERE id = @Id";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@Id", SqlDbType.Int).Value = albumId;
+            DataTable dt = sqlDao.Execute(command);
+            Album album;
+            foreach (DataRow dr in dt.Rows)
+            {
+                int id = (int)dr["id"];
+                string name = dr["name"].ToString();
+                DateTime release = Convert.ToDateTime(dr["release_date"].ToString());
+                string imageBig = dr["image_big_url"].ToString();
+                string imageSmall = dr["image_small_url"].ToString();
+                int artistId = (int)dr["artist_id"];
+                DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
+                DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
+
+                Artist artist = _artr.GetArtistById(artistId);
+
+                album = new Album(id, name, release, imageBig, imageSmall, artist, created, updated);
+
+                return album;
+            }
+
+            return null;
+        }
+
         public void AddAlbum(Album album)
         {
             string query =
@@ -155,13 +183,15 @@ namespace Musify_Web.Models.DAO
                     string youtube = dr["youtube_url"].ToString();
                     string soundcloud = dr["soundcloud_url"].ToString();
                     string server = dr["server_url"].ToString();
+                    int albumId = (int) dr["album_id"];
                     int artistId = (int) dr["album_artist_id"];
                     DateTime created = Convert.ToDateTime(dr["created_at"].ToString());
                     DateTime updated = Convert.ToDateTime(dr["updated_at"].ToString());
                     List<Artist> artists = new List<Artist>();
+                    Album album = GetAlbumQueryById(albumId);
                     Artist artist = _artr.GetArtistById(artistId);
                     artists.Add(artist);
-
+                    
                     string queryFeatured = "SELECT * FROM featured AS f INNER JOIN artist AS a ON a.id = f.artist_id INNER JOIN Song AS s ON s.id = f.song_id AND f.song_id = @Id";
                     SqlCommand commandF = new SqlCommand(queryFeatured, conn);
                     commandF.Parameters.Add("@Id", SqlDbType.Int).Value = songId;
@@ -177,8 +207,8 @@ namespace Musify_Web.Models.DAO
                             artists.Add(featured);
                         }
                     }
-
-                    songs.Add(new Song(songId, name, number, duration, youtube, soundcloud, server, created, updated,
+                    
+                    songs.Add(new Song(songId, name, number, duration, youtube, soundcloud, server, album, created, updated,
                         artists));
                 }
             }

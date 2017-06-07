@@ -37,6 +37,23 @@ namespace Musify_Web.Controllers
             }
         }
 
+        // GET: ClientGenres
+        [Route("Genres")]
+        public ActionResult ClientGenres()
+        {
+            try
+            {
+                Genre[] genreList = _gr.GetAllGenres();
+
+                return View(genreList);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
+
         [Route("admin/Genres/Details/{id}")]
         public ActionResult Artists(int id)
         {

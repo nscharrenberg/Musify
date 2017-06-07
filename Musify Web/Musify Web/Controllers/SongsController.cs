@@ -87,12 +87,7 @@ namespace Musify_Web.Controllers
             try
             {
                 Song song = _sr.GetSongById(songId);
-                eh.WriteToFile(song.Id + " " + song.Name + song.Album.Id + " " + albumId);
-
-                if (song == null)
-                {
-                    return HttpNotFound();
-                }
+                eh.WriteToFile(song.Id + " " + song.Name + song.Album.Id + " " + albumId + " " + song.Artists.Count);
 
                 return View(song);
             }

@@ -164,13 +164,14 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                Album album = _albr.GetAlbumById(id);
-                if (album == null)
+                //Album album = _albr.GetAlbumById(id);
+                List<Song> songs = _albr.GetSongAlbums(id);
+                if (songs == null)
                 {
                     return HttpNotFound();
                 }
 
-                return View(album);
+                return View(songs);
             }
             catch (Exception ex)
             {

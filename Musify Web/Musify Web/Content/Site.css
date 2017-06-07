@@ -74,4 +74,215 @@ table tr .clickable-row {
     color: #fff;
 }
 
+.media-object .mo-info, .media-object .mo-owner {
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.media-object {
+    padding-bottom: 2.5em;
+    position: relative;
+}
+.media-object .hoverable.playing .icon, .media-object .hoverable:focus .icon, .media-object .hoverable:hover .icon {
+    display: none;
+}
+.media-object .hoverable.playing .cover-art-image, .media-object .hoverable.playing .daily-mix-decoration, .media-object .hoverable:focus .cover-art-image, .media-object .hoverable:focus .daily-mix-decoration, .media-object .hoverable:hover .cover-art-image, .media-object .hoverable:hover .daily-mix-decoration {
+    filter: brightness(0.3);
+    transition: all 0.2s ease 0s;
+}
+.media-object .hoverable.playing .cover-art-playback, .media-object .hoverable:focus .cover-art-playback, .media-object .hoverable:hover .cover-art-playback {
+    display: block;
+}
+.media-object.daily-mix .cover-art-image {
+    filter: grayscale(100%) contrast(85%);
+}
+.media-object .cover-art {
+    padding-top: 100%;
+}
+.media-object .mo-info {
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    margin: 12px 0 4px;
+}
+.media-object .mo-info-name {
+    border-bottom: medium none;
+    font-size: 1.1em;
+    line-height: 1.2;
+    max-height: 2.64em;
+}
+.media-object .mo-owner {
+    color: #999;
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.media-object .mo-owner .react-contextmenu-wrapper {
+    display: inline;
+}
+.media-object .mo-owner a {
+    color: #999;
+    transition: color 0.2s ease 0s;
+}
+.media-object .mo-owner a:hover {
+    border-bottom: medium none;
+    color: #fff;
+}
+.media-object .mo-meta {
+    color: #999;
+    font-size: 90%;
+    padding-top: 6px;
+}
+.media-object .cover-art.rounded .cover-art-image {
+    border-radius: 50%;
+}
+.media-object .mo-coverArt-hover {
+    -moz-box-align: center;
+    -moz-box-pack: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.media-object .mo-coverArt-hoverContainer {
+    cursor: pointer;
+    position: relative;
+}
+.media-object .mo-coverArt-hoverContainer:hover .mo-coverArt-hover {
+    display: flex;
+}
+@media (max-width: 768px) {
+    .media-object .mo-info {
+        white-space: normal;
+    }
+}
+
+.cover-art {
+    background-color: #202020;
+    border: 0 none;
+    display: block;
+    margin: 0;
+    outline: 0 none;
+    position: relative;
+}
+
+    .cover-art .cover-art-image .cover-art-image-artist, .cover-art.rounded {
+        border-radius: 50%;
+    }
+
+    .cover-art.actionable {
+        cursor: pointer;
+        transition: all 0.1s ease 0s;
+    }
+
+        .cover-art.actionable:active {
+            box-shadow: none;
+            transform: scale3d(0.93, 0.93, 1);
+        }
+
+    .cover-art.shadow {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .cover-art.light::after {
+        background-color: hsla(0, 0%, 100%, 0.15);
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .cover-art .daily-mix-decoration .waves {
+        background-color: rgba(30, 50, 100, 0.5);
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .cover-art .daily-mix-decoration .bottom-text {
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .cover-art .cover-art-image {
+        background-position: 50% center;
+        background-size: cover;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: opacity 0.3s ease 0s;
+        width: 100%;
+    }
+
+    .cover-art .cover-art-image-loaded {
+        opacity: 1;
+    }
+
+    .cover-art .cover-art-playback {
+        background-color: transparent;
+        border: 1px solid #a0a0a0;
+        border-radius: 500px;
+        box-sizing: content-box;
+        color: #fff;
+        cursor: pointer;
+        display: none;
+        height: 62px;
+        left: 50%;
+        margin-left: -31px;
+        margin-top: -31px;
+        outline: 0 none;
+        position: absolute;
+        top: 50%;
+        transition: all 0.3s cubic-bezier(0, 0, 0, 2.41) 0s;
+        width: 62px;
+        z-index: 3;
+    }
+
+        .cover-art .cover-art-playback:hover {
+            border-color: #fff;
+            transform: scale(1.2);
+        }
+
+        .cover-art .cover-art-playback svg {
+            height: 100%;
+            transform: scale(0.5);
+            width: 100%;
+        }
+
+            .cover-art .cover-art-playback svg.icon-play {
+                margin-left: 4px;
+            }
+
+        .cover-art .cover-art-playback.playing {
+            border-color: #fff;
+            display: block;
+        }
+
+    .cover-art .icon {
+        bottom: 35%;
+        left: 35%;
+        position: absolute;
+        right: 35%;
+        top: 35%;
+    }
+
+        .cover-art .icon svg {
+            height: 100%;
+            width: 100%;
+        }
 
