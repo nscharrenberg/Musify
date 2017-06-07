@@ -85,7 +85,7 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                Album album = _albr.GetAlbumById(albumId);
+                Album album = _albr.GetAlbumQueryById(albumId);
 
                 if (album == null)
                 {
@@ -126,7 +126,7 @@ namespace Musify_Web.Controllers
             try
             {
 
-                Album album = _albr.GetAlbumById(albumId);
+                Album album = _albr.GetAlbumQueryById(albumId);
 
                 if (album == null)
                 {
@@ -172,6 +172,26 @@ namespace Musify_Web.Controllers
                 }
 
                 return View(songs);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
+        }
+
+        [Route("Artists/Album/{id}")]
+        public ActionResult ClientAlbumOverview(int id)
+        {
+            try
+            {
+                SongAlbumOverView saov = new SongAlbumOverView()
+                {
+                    Songs = _albr.GetSongAlbums(id),
+                    Album = _albr.GetAlbumQueryById(id)
+                };
+
+                return View(saov);
             }
             catch (Exception ex)
             {

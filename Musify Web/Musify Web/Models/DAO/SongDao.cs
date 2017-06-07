@@ -131,7 +131,7 @@ namespace Musify_Web.Models.DAO
         public void Addsong(Song song)
         {
             string query =
-                "INSERT INTO [song] (name, number, duration, youtube_url, soundcloud_url, server_url, album_id, created_at, updated_at) VALUES(@name, @number, @duration, @youtube, @soundcloud, @server, @album, @created, @updated)";
+                "INSERT INTO [song] (name, number, duration, youtube_url, soundcloud_url, server_url, album_id, album_artist_id, created_at, updated_at) VALUES(@name, @number, @duration, @youtube, @soundcloud, @server, @album, @artist, @created, @updated)";
             SqlCommand command = new SqlCommand(query, conn);
             command.Parameters.Add("@name", SqlDbType.VarChar).Value = song.Name;
             command.Parameters.Add("@number", SqlDbType.Int).Value = song.Number;
@@ -140,6 +140,7 @@ namespace Musify_Web.Models.DAO
             command.Parameters.Add("@soundcloud", SqlDbType.VarChar).Value = song.SoundcloudUrl;
             command.Parameters.Add("@server", SqlDbType.VarChar).Value = song.ServerUrl;
             command.Parameters.Add("@album", SqlDbType.Int).Value = song.Album.Id;
+            command.Parameters.Add("@artist", SqlDbType.Int).Value = song.Album.Artist.Id;
             command.Parameters.Add("@created", SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             command.Parameters.Add("@updated", SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             sqlDao.ExecuteNonQuery(command);

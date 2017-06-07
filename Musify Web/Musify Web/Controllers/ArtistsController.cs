@@ -299,5 +299,24 @@ namespace Musify_Web.Controllers
             }
         }
 
+        [Route("Artists/Details/{id}")]
+        public ActionResult ClientArtistDetails(int id)
+        {
+            try
+            {
+                Artist artist = _ar.GetArtistById(id);
+                if (artist == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(artist);
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.Message);
+                return View();
+            }
+        }
     }
 }

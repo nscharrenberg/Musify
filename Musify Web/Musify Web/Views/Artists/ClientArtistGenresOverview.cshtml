@@ -1,0 +1,25 @@
+﻿@model Musify_Web.Models.Artist
+
+<h1>Genres of @Model.Name</h1>
+
+<div class="row">
+    @foreach (var item in Model.Genres)
+    {
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+            <div class="media-object" style="max-width: 450px;">
+                <div class="hoverable">
+                    <div class="react-contextmenu-wrapper">
+                        <a href="@Url.Action("Details", "Album", new { id = item.Id })" class="cover-art shadow light">
+                            <div>
+                                <div class="cover-art-image cover-art-image-loaded" style="background-image: url(@Html.DisplayTextFor(model => item.ImageUrl));"></div>
+                            </div>
+                            
+                        </a>
+                    </div>
+                    <div class="mo-info"><div class="react-contextmenu-wrapper"><a class="mo-info-name" href="@Url.Action("Details", "Album", new { id = item.Id })">@item.Name</a></div></div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

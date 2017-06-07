@@ -7,6 +7,8 @@ namespace Musify_Web.Models
 {
     public class Song
     {
+        private List<Artist> artist;
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }
@@ -72,6 +74,20 @@ namespace Musify_Web.Models
             YoutubeUrl = youtubeUrl;
             SoundcloudUrl = soundcloudUrl;
             ServerUrl = serverUrl;
+            Created = created;
+            Updated = updated;
+            Artists = artists;
+        }
+
+        public Song(string name, int number, int duration, string youtubeUrl, string soundcloudUrl, string serverUrl, Album album, DateTime created, DateTime updated, List<Artist> artists)
+        {
+            Name = name;
+            Number = number;
+            Duration = duration;
+            YoutubeUrl = youtubeUrl;
+            SoundcloudUrl = soundcloudUrl;
+            ServerUrl = serverUrl;
+            Album = album;
             Created = created;
             Updated = updated;
             Artists = artists;

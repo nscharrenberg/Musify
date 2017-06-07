@@ -167,6 +167,7 @@
     <Compile Include="Models\ViewModel\ArtistGenreViewModel.cs" />
     <Compile Include="Models\ViewModel\ArtistViewModel.cs" />
     <Compile Include="Models\ViewModel\CreateSongViewModel.cs" />
+    <Compile Include="Models\ViewModel\SongAlbumOverView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Repository\GenreRepository.cs" />
   </ItemGroup>
@@ -346,6 +347,11 @@
     <Content Include="Views\Songs\Delete.cshtml" />
     <Content Include="Views\Genres\ClientGenres.cshtml" />
     <Content Include="Views\Artists\ClientArtists.cshtml" />
+    <Content Include="Views\Artists\ClientArtistDetails.cshtml" />
+    <Content Include="Views\Artists\ClientAlbumsOverview.cshtml" />
+    <Content Include="Views\Artists\ClientArtistGenresOverview.cshtml" />
+    <Content Include="Views\Shared\_LayoutJumboFw.cshtml" />
+    <Content Include="Views\Album\ClientAlbumOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

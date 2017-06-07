@@ -41,12 +41,6 @@ namespace Musify_Web.Controllers
             
         }
 
-        // GET: Songs/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Songs/Create
         [Route("admin/Albums/{id}/Songs/Create")]
         public ActionResult Create(int id)
@@ -61,8 +55,7 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                Album album = _albr.GetAlbumById(id);
-
+                Album album = _albr.GetAlbumQueryById(id);
                 eh.WriteToFile(song.Name + " / " + song.Duration + @" \ " + album.Name + " " + song.Number);
                 Song newSong = new Song(song.Name, song.Number, song.Duration, song.YoutubeUrl, song.SoundcloudUrl, song.ServerUrl, album, song.Created, song.Updated);
 
@@ -70,8 +63,7 @@ namespace Musify_Web.Controllers
 
                 _sr.Addsong(newSong);
 
-
-                return RedirectToAction("Songs", "Album", new {id = id});
+                return RedirectToAction("Songs", "Album", new { id = id});
             }
             catch (Exception ex)
             {
@@ -86,7 +78,7 @@ namespace Musify_Web.Controllers
         {
             try
             {
-                Song song = _sr.GetSongById(songId);
+                Song song = _sr.GetSongByIdAndAlbum(albumId, songId);
                 eh.WriteToFile(song.Id + " " + song.Name + song.Album.Id + " " + albumId + " " + song.Artists.Count);
 
                 return View(song);
@@ -123,7 +115,7 @@ namespace Musify_Web.Controllers
             try
             {
 
-                Song song = _sr.GetSongById(songId);
+                Song song = _sr.GetSongByIdAndAlbum(albumId, songId);
 
                 if (song == null)
                 {
