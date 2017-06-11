@@ -73,6 +73,13 @@ namespace Musify_Web.Models
             UpdatedAt = updatedAt;
         }
 
+        public Artist(int id, string name, string image)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.ImageSmallUrl = image;
+        }
+
         public Artist()
         {
             

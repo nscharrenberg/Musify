@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<h2>Index</h2>
+@Html.Label("Enter artist you'd like to search")
+@Html.TextBox("searchBarId")
+<div id="VisitorDetail">
+    <label>Id</label><div id="Id"></div>
+    <label>Name</label><div id="Name"></div>
+</div>
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        $('#results').hide();
+    });
+    $("#searchBarId").autocomplete({
+        source: function (request, response) {
+            var artist = new Array();
+            $.ajax({
+                async: false,
+                cache: false,
+                type: "POST",
+                url: "@(Url.Action("Autocomplete", "Search"))",
+                data: { "content": request.content },
+                success: function (data) {
+                    for (var i = 0; i < data.length ; i++) {
+                        artist[i] = { label: data[i].Value, Id: data[i].Key };
+                    }
+                }
+            });
+            response(artist);
+        },
+        select: function (event, ui) {
+            //fill selected customer details on form
+            $.ajax({
+                cache: false,
+                async: false,
+                type: "POST",
+                url: "@(Url.Action("GetArtistById", "Search"))",
+                data: { "id": ui.item.Id },
+
+                success: function (data) {
+                    $('#results').show();
+                    $("#Id").html(data.id)
+                    $("#Name").html(data.name)
+                    $("#thumbnail").html(data.ImageSmallUrl)
+                    action = data.Action;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to retrieve states.');
+                }
+            });
+        }
+    });
+
+</script>

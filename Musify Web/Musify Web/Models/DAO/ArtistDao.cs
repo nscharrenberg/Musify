@@ -162,9 +162,10 @@ namespace Musify_Web.Models.DAO
 
         public void AddGenreToArtist(int artist, int genre)
         {
-            string query =
-                "INSERT INTO [genre_artist] (genre_id, artist_id, created_at) VALUES(@genre, @artist, @created)";
-            SqlCommand command = new SqlCommand(query, conn);
+            /*string query =
+                "INSERT INTO [genre_artist] (genre_id, artist_id, created_at) VALUES(@genre, @artist, @created)";*/
+            SqlCommand command = new SqlCommand("spAddGenreToArtist", conn);
+            command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add("@genre", SqlDbType.Int).Value = genre;
             command.Parameters.Add("@artist", SqlDbType.Int).Value = artist;
             command.Parameters.Add("@created", SqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");

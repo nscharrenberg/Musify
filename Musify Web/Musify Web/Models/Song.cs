@@ -118,6 +118,13 @@ namespace Musify_Web.Models
             Updated = updated;
         }
 
+        public Song(int id, string name, int duration)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Duration = duration;
+        }
+
         public Song()
         {
             

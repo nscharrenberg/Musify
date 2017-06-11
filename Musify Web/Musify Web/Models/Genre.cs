@@ -71,6 +71,13 @@ namespace Musify_Web.Models
             Artists = artists;
         }
 
+        public Genre(int id, string name, string imageUrl)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.ImageUrl = imageUrl;
+        }
+
         public Genre()
         {
             
