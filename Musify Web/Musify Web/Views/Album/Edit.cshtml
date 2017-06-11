@@ -11,7 +11,9 @@
     @Html.AntiForgeryToken()
     <div class="form-horizontal" _lpchecked="1">
         <fieldset>
-            <legend>Legend</legend>
+            <br />
+            <h1>Edit Album <span class="text-primary">@Model.Name</span></h1>
+            <hr />
             <div class="form-group">
                 <label for="inputName" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
@@ -47,7 +49,7 @@
                 <div class="col-lg-10 col-lg-offset-2">
                     @Html.HiddenFor(model => model.Id)
                     @Html.HiddenFor(model => model.Artist.Id)
-                    @Html.ActionLink("Cancel", "Index", "Artists", null, new {@class = "btn btn-default"})
+                    @Html.ActionLink("Cancel", "Genres", "Artists", new { id = Model.Artist.Id }, new {@class = "btn btn-default"})
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

@@ -1,7 +1,7 @@
 ﻿@model Musify_Web.Models.Album
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Album";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,19 +12,21 @@
 
     <div class="form-horizontal" _lpchecked="1">
         <fieldset>
-            <legend>Legend</legend>
+            <br />
+            <h1>Add Album</h1>
+            <hr />
             <div class="form-group">
                 <label for="inputName" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "inputName", @placeholder = "Album Name" })
+                    @Html.TextBoxFor(model => model.Name, new {@class = "form-control", @id = "inputName", @placeholder = "Album Name"})
                     @Html.ValidationMessageFor(model => model.Name)
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputDate" class="col-lg-2 control-label">Release Date</label>
                 <div class="col-lg-10">
-                    
-                    @Html.TextBoxFor(model => model.ReleaseDate, new { @class = "form-control", @id = "inputDate", @placeholder = "Set a Date", @type = "text" })
+
+                    @Html.TextBoxFor(model => model.ReleaseDate, new {@class = "form-control", @id = "inputDate", @placeholder = "Set a Date", @type = "text"})
                     @Html.ValidationMessageFor(model => model.ReleaseDate)
                 </div>
             </div>
@@ -33,7 +35,7 @@
                 <label for="inputImageSmall" class="col-lg-2 control-label">Image</label>
                 <div class="col-lg-10">
 
-                    @Html.TextBoxFor(model => model.ImageBigUrl, new { @class = "form-control", @id = "inputImageSmall", @placeholder = "Thumbnail of artist", @type = "text" })
+                    @Html.TextBoxFor(model => model.ImageBigUrl, new {@class = "form-control", @id = "inputImageSmall", @placeholder = "Thumbnail of artist", @type = "text"})
                     @Html.ValidationMessageFor(model => model.ImageBigUrl)
                 </div>
             </div>
@@ -41,13 +43,12 @@
                 <label for="inputImageBig" class="col-lg-2 control-label">Thumbnail</label>
                 <div class="col-lg-10">
 
-                    @Html.TextBoxFor(model => model.ImageSmallUrl, new { @class = "form-control", @id = "inputImageBig", @placeholder = "Image of artist", @type = "text" })
+                    @Html.TextBoxFor(model => model.ImageSmallUrl, new {@class = "form-control", @id = "inputImageBig", @placeholder = "Image of artist", @type = "text"})
                     @Html.ValidationMessageFor(model => model.ImageSmallUrl)
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    @Html.ActionLink("Cancel", "AllAlbums", "Album", new {@class = "btn btn-default"})
                     @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
