@@ -46,11 +46,11 @@ namespace Musify_Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult GetArtistById(int id)
+        public JsonResult GetArtistById(int id)
         {
             Artist artist = _ar.GetArtistById(id);
 
-            return RedirectToAction("ClientArtistDetails", "Artists", new {id = artist.Id});
+            return Json(artist);
 
         }
     }

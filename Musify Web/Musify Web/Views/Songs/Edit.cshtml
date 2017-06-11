@@ -69,6 +69,7 @@
                 @Html.HiddenFor(model => model.Id)
                 @Html.HiddenFor(model => model.Album.Id)
                 @Html.HiddenFor(model => model.Artists)
+                @Html.AntiForgeryToken()
                 @Html.ActionLink("Cancel", "Index", "Artists", null, new {@class = "btn btn-default"})
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

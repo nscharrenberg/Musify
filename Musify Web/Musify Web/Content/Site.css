@@ -289,7 +289,6 @@ table tr .clickable-row {
 
 .search {
     position: relative;
-    width: 300px;
 }
 
 
@@ -439,3 +438,18 @@ table tr .clickable-row {
 .ui-autocomplete {
     position: absolute;
 }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border-color: red;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px red;
+    outline: 0 none;
+}
+

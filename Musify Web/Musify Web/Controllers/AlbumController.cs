@@ -22,6 +22,9 @@ namespace Musify_Web.Controllers
         static ArtistDao artistDao = new ArtistDao();
         ArtistRepository _artr = new ArtistRepository(artistDao);
 
+        private static SearchDao sDao = new SearchDao();
+        private SearchRepository _sr = new SearchRepository(sDao);
+
         Exceptions eh = new Exceptions();
 
         // GET: Album
@@ -33,6 +36,16 @@ namespace Musify_Web.Controllers
             {
                 Album[] albumList = _albr.GetAllAlbums();
                 return View(albumList);
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message});
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -46,7 +59,25 @@ namespace Musify_Web.Controllers
         [Route("admin/Albums/Details")]
         public ActionResult Details(int id)
         {
-            return View(_albr.GetAlbumById(id));
+            try
+            {
+                return View(_albr.GetAlbumById(id));
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
         }
 
         // GET: Album/Create
@@ -61,6 +92,11 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(int artistId, Album album)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", new Album());
+            }
+
             try
             {
                 Artist artist = _artr.GetArtistById(artistId);
@@ -72,6 +108,16 @@ namespace Musify_Web.Controllers
 
                 return RedirectToAction("Genres", "Artists", new {id = artistId});
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
                 eh.WriteToFile(ex.ToString());
@@ -81,7 +127,7 @@ namespace Musify_Web.Controllers
 
         // GET: Album/Edit/5
         [Route("admin/artists/{artistId}/Albums/{albumId}/Edit")]
-        public ActionResult Edit(int artistId, int albumId)
+        public ActionResult Edit(int albumId)
         {
             try
             {
@@ -94,9 +140,19 @@ namespace Musify_Web.Controllers
 
                 return View(album);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -106,11 +162,27 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Album album)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", album);
+            }
+
             try
             {
                 _albr.UpdateAlbumById(album);
 
                 return RedirectToAction("Genres", "Artists", new { id = album.Artist.Id });
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -135,9 +207,19 @@ namespace Musify_Web.Controllers
 
                 return View(album);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -147,14 +229,26 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Delete(int artistId, int albumId, FormCollection collection)
         {
+
             try
             {
                 _albr.DeleteAlbumById(albumId);
 
                 return RedirectToAction("Genres","Artists", new { id = artistId });
             }
-            catch
+            catch (SqlException ex)
             {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -172,6 +266,16 @@ namespace Musify_Web.Controllers
                 }
 
                 return View(songs);
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -193,11 +297,53 @@ namespace Musify_Web.Controllers
 
                 return View(saov);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
                 eh.WriteToFile(ex.ToString());
                 return View();
             }
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AutoComplete(string content)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+
+            IList<SelectListItem> List = new List<SelectListItem>();
+
+            List<Album> albums = _sr.getAlbumsSearchResults(content);
+            foreach (var item in albums)
+            {
+                List.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+
+            foreach (var item in List)
+            {
+                result.Add(new KeyValuePair<string, string>(item.Value, item.Text));
+            }
+
+            var results3 = result.Where(s => s.Value.ToLower().Contains(content.ToLower())).Select(w => w).ToList();
+
+            return Json(results3, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GetAlbumById(int id)
+        {
+            int album = id;
+
+            return Json(album);
+
         }
     }
 }

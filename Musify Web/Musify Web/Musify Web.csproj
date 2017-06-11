@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -400,6 +401,8 @@
     <Content Include="Views\Shared\_LayoutJumboFw.cshtml" />
     <Content Include="Views\Album\ClientAlbumOverview.cshtml" />
     <Content Include="Views\Search\Autocomplete.cshtml" />
+    <Content Include="Views\Error\DatabaseException.cshtml" />
+    <Content Include="Views\Error\SqlException.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

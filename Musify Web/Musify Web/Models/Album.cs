@@ -9,10 +9,23 @@ namespace Musify_Web.Models
     public class Album
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please enter an Album name")]
+        [Display(Name = "Album Name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please enter the release date of this Album")]
+        [Display(Name = "Album releasedate")]
         public DateTime ReleaseDate { get; set; }
+
+        [Required(ErrorMessage = "Please add an album cover")]
+        [Display(Name = "Album image")]
         public string ImageBigUrl { get; set; }
+
+        [Required(ErrorMessage = "Please enter a thumbnail of the album cover")]
+        [Display(Name = "Album thumbnail")]
         public string ImageSmallUrl { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public Artist Artist { get; set; }

@@ -23,6 +23,9 @@ namespace Musify_Web.Controllers
         static AlbumDao albumDao = new AlbumDao();
         AlbumRepository _albr = new AlbumRepository(albumDao);
 
+        private static SearchDao sDao = new SearchDao();
+        private SearchRepository _ser = new SearchRepository(sDao);
+
         Exceptions eh = new Exceptions();
 
         // GET: Songs
@@ -32,6 +35,16 @@ namespace Musify_Web.Controllers
             try
             {
                 return View(_sr.GetAllSongs());
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -45,7 +58,25 @@ namespace Musify_Web.Controllers
         [Route("admin/Albums/{id}/Songs/Create")]
         public ActionResult Create(int id)
         {
-            return View(new Song());
+            try
+            {
+                return View(new Song());
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
         }
 
         // POST: Songs/Create
@@ -53,6 +84,11 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(int id, Song song)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", new Song());
+            }
+
             try
             {
                 Album album = _albr.GetAlbumQueryById(id);
@@ -64,6 +100,16 @@ namespace Musify_Web.Controllers
                 _sr.Addsong(newSong);
 
                 return RedirectToAction("Songs", "Album", new { id = id});
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -83,9 +129,19 @@ namespace Musify_Web.Controllers
 
                 return View(song);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -95,11 +151,26 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Song song)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", song);
+            }
+
             try
             {
                 _sr.UpdatesongById(song);
 
                 return RedirectToAction("Songs", "Album", new { id = song.Album.Id });
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -124,9 +195,19 @@ namespace Musify_Web.Controllers
 
                 return View(song);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -142,10 +223,53 @@ namespace Musify_Web.Controllers
 
                 return RedirectToAction("Songs", "Album", new { id = albumId });
             }
-            catch
+            catch (SqlException ex)
             {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex) 
+            {
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AutoComplete(string content)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+
+            IList<SelectListItem> List = new List<SelectListItem>();
+
+            List<Song> songs = _ser.getSongsSearchResults(content);
+            foreach (var item in songs)
+            {
+                List.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+
+            foreach (var item in List)
+            {
+                result.Add(new KeyValuePair<string, string>(item.Value, item.Text));
+            }
+
+            var results3 = result.Where(s => s.Value.ToLower().Contains(content.ToLower())).Select(w => w).ToList();
+
+            return Json(results3, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GetSongById(int id)
+        {
+
+            return Json(id);
+
         }
     }
 }

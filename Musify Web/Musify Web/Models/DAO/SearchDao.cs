@@ -17,9 +17,9 @@ namespace Musify_Web.Models.DAO
         {
             List<Genre> genres = new List<Genre>();
 
-            string genreQuery = "SELECT * FROM Genre AS g WHERE g.name LIKE '%@Content%'";
+            string genreQuery = "SELECT * FROM Genre AS g WHERE g.name LIKE @Content";
             SqlCommand gcmd = new SqlCommand(genreQuery, conn);
-            gcmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = content;
+            gcmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = "%" + content + "%";
             DataTable gdt = sqlDao.Execute(gcmd);
 
             if (gdt.Rows.Count != 0)
@@ -90,9 +90,9 @@ namespace Musify_Web.Models.DAO
         {
             List<Album> albums = new List<Album>();
 
-            string albumQuery = "SELECT * FROM Album AS alb WHERE alb.name LIKE '%@Content%'";
+            string albumQuery = "SELECT * FROM Album AS alb WHERE alb.name LIKE @Content";
             SqlCommand albcmd = new SqlCommand(albumQuery, conn);
-            albcmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = content;
+            albcmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = "%" + content + "%";
             DataTable albdt = sqlDao.Execute(albcmd);
 
             if (albdt.Rows.Count != 0)
@@ -114,9 +114,9 @@ namespace Musify_Web.Models.DAO
         {
             List<Song> songs = new List<Song>();
 
-            string songQuery = "SELECT * FROM Album AS alb WHERE alb.name LIKE '%@Content%'";
+            string songQuery = "SELECT * FROM Song AS s WHERE s.name LIKE @Content";
             SqlCommand scmd = new SqlCommand(songQuery, conn);
-            scmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = content;
+            scmd.Parameters.Add("@Content", SqlDbType.VarChar).Value = "%" + content + "%";
             DataTable sdt = sqlDao.Execute(scmd);
 
             if (sdt.Rows.Count != 0)

@@ -9,15 +9,22 @@ namespace Musify_Web.Models
     public class Genre
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a Genre name")]
+        [Display(Name = "Genre Name")]
         public string Name { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please enter the Genre description")]
+        [Display(Name = "Genre Description")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please add an image to this Genre")]
+        [Display(Name = "Genre Image")]
         public string ImageUrl { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get;  set; }
+        [Required]
         public bool Public { get; set; }
 
         // List

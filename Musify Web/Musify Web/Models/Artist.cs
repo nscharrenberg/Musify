@@ -9,15 +9,24 @@ namespace Musify_Web.Models
     public class Artist
     {
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please enter an Artist name")]
+        [Display(Name = "Artist Name")]
         public string Name { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please add an image of the Artist")]
+        [Display(Name = "Artist Image")]
         public string ImageBigUrl { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please add a thumbnail image of the Artist")]
+        [Display(Name = "Artist thumbnail")]
         public string ImageSmallUrl { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please enter the Artist's biography")]
+        [Display(Name = "Artist Biography")]
         [DataType(DataType.MultilineText)]
         public string Biography { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 

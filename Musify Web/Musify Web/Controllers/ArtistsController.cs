@@ -24,6 +24,9 @@ namespace Musify_Web.Controllers
         static GenreDao genreDao = new GenreDao();
         private GenreRepository _gr = new GenreRepository(genreDao);
 
+        private static SearchDao sDao = new SearchDao();
+        private SearchRepository _sr = new SearchRepository(sDao);
+
         Exceptions eh = new Exceptions();
 
         // GET: Artists
@@ -35,6 +38,16 @@ namespace Musify_Web.Controllers
                 Artist[] artistList = _ar.GetAllArtists();
 
                 return View(artistList);
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
             }
             catch (Exception ex)
             {
@@ -56,9 +69,19 @@ namespace Musify_Web.Controllers
 
                 return View(genre);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -76,9 +99,19 @@ namespace Musify_Web.Controllers
 
                 return View(artist);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -87,8 +120,25 @@ namespace Musify_Web.Controllers
         [Route("admin/Artists/Create")]
         public ActionResult Create()
         {
-
-            return View(new Artist());
+            try
+            {
+                return View(new Artist());
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
         }
 
         // POST: Genres/Create
@@ -96,15 +146,30 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(Artist artist)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", new Artist());
+            }
+
             try
             {
                 _ar.AddArtist(artist);
 
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
 
@@ -124,9 +189,19 @@ namespace Musify_Web.Controllers
                 }
                 return View(artist);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -136,15 +211,30 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Artist artist)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", artist);
+            }
+
             try
             {
                 _ar.UpdateArtistById(artist);
 
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -165,9 +255,19 @@ namespace Musify_Web.Controllers
 
                 return View(artist);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -183,9 +283,19 @@ namespace Musify_Web.Controllers
 
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -212,9 +322,19 @@ namespace Musify_Web.Controllers
 
                 return View(avm);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -224,13 +344,31 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult AddGenres(ArtistViewModel avm)
         {
-            int artist = avm.Artist.Id;
-            int genre = avm.SelecterGenre;
+            try
+            {
+                int artist = avm.Artist.Id;
+                int genre = avm.SelecterGenre;
 
-            _ar.AddGenreToArtist(artist, genre);
-            _ar.SetUpdateTimeForArtistById(avm.Artist);
+                _ar.AddGenreToArtist(artist, genre);
+                _ar.SetUpdateTimeForArtistById(avm.Artist);
 
-            return RedirectToAction("Genres", "Artists", artist);
+                return RedirectToAction("Genres", "Artists", artist);
+            }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
+            catch (Exception ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return View();
+            }
 
         }
 
@@ -254,9 +392,19 @@ namespace Musify_Web.Controllers
 
                 return View(agvm);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -272,9 +420,19 @@ namespace Musify_Web.Controllers
                 _ar.SetUpdateTimeForArtistById(_ar.GetArtistById(artistId));
                 return RedirectToAction("Genres", "Artists", new { id = artistId});
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -292,9 +450,19 @@ namespace Musify_Web.Controllers
 
                 return View(artist);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -312,11 +480,55 @@ namespace Musify_Web.Controllers
 
                 return View(artist);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AutoComplete(string content)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+
+            IList<SelectListItem> List = new List<SelectListItem>();
+
+            List<Artist> artists = _sr.getArtistsSearchResults(content);
+            foreach (var item in artists)
+            {
+                List.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+
+            foreach (var item in List)
+            {
+                result.Add(new KeyValuePair<string, string>(item.Value, item.Text));
+            }
+
+            var results3 = result.Where(s => s.Value.ToLower().Contains(content.ToLower())).Select(w => w).ToList();
+
+            return Json(results3, JsonRequestBehavior.AllowGet);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GetArtistById(int id)
+        {
+            Artist artist = _ar.GetArtistById(id);
+
+            return Json(artist);
+
+        }
+
+
     }
 }

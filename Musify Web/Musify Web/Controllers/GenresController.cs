@@ -6,6 +6,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Musify_Web.Models;
+using Musify_Web.Models.DAO;
+using Musify_Web.Models.Repository;
 using Musify_Web.Repository;
 using Musify_Web.Repository.DAO;
 using Musify_Web.Repository.Interface;
@@ -18,10 +20,15 @@ namespace Musify_Web.Controllers
         SqlConnection conn = new SqlConnection(_SqlDAl.Connectionstring);
         static GenreDao genreDao = new GenreDao();
         GenreRepository _gr = new GenreRepository(genreDao);
+
+        private static SearchDao sDao = new SearchDao();
+        private SearchRepository _sr = new SearchRepository(sDao);
+
+
         Exceptions eh = new Exceptions();
            
         // GET: Genres
-        [Route("admin/Genres/Index")]
+        [Route("admin/Genres")]
         public ActionResult Index()
         {
             try
@@ -30,9 +37,19 @@ namespace Musify_Web.Controllers
 
                 return View(genreList);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -47,9 +64,19 @@ namespace Musify_Web.Controllers
 
                 return View(genreList);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -67,9 +94,19 @@ namespace Musify_Web.Controllers
 
                 return View(genre);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -87,15 +124,30 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(Genre genre)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", new Genre());
+            }
+
             try
             {
                 _gr.AddGenre(genre);
 
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
             
@@ -115,9 +167,19 @@ namespace Musify_Web.Controllers
                 }
                 return View(genre);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -127,15 +189,30 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Genre genre)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", genre);
+            }
+
             try
             {
                 _gr.UpdateGenreById(genre);
 
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -154,9 +231,19 @@ namespace Musify_Web.Controllers
                 }
                 return View(genre);
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message);
+                eh.WriteToFile(ex.ToString());
                 return View();
             }
         }
@@ -171,11 +258,53 @@ namespace Musify_Web.Controllers
                 _gr.DeleteGenreById(id);
                 return RedirectToAction("Index");
             }
+            catch (SqlException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("SqlException", "Error", new { msg = ex.Message });
+            }
+            catch (NullReferenceException ex)
+            {
+                eh.WriteToFile(ex.ToString());
+                return RedirectToAction("DatabaseException", "Error");
+            }
             catch (Exception ex)
             {
-                eh.WriteToFile(ex.Message + id);
+                eh.WriteToFile(ex.ToString() + id);
                 return View();
             }
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AutoComplete(string content)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+
+            IList<SelectListItem> List = new List<SelectListItem>();
+
+            List<Genre> genres = _sr.getGenresSearchResults(content);
+            foreach (var item in genres)
+            {
+                List.Add(new SelectListItem { Text = item.Name, Value = item.Id.ToString() });
+            }
+
+            foreach (var item in List)
+            {
+                result.Add(new KeyValuePair<string, string>(item.Value, item.Text));
+            }
+
+            var results3 = result.Where(s => s.Value.ToLower().Contains(content.ToLower())).Select(w => w).ToList();
+
+            return Json(results3, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult GetGenreById(int id)
+        {
+
+            return Json(id);
+
         }
     }
 }
