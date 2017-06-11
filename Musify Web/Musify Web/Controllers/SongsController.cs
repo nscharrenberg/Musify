@@ -84,11 +84,6 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(int id, Song song)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Create", new Song());
-            }
-
             try
             {
                 Album album = _albr.GetAlbumQueryById(id);
@@ -151,11 +146,6 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Song song)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", song);
-            }
-
             try
             {
                 _sr.UpdatesongById(song);

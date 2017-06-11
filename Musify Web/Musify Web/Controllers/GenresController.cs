@@ -124,10 +124,6 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(Genre genre)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Create", new Genre());
-            }
 
             try
             {
@@ -189,11 +185,6 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Genre genre)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", genre);
-            }
-
             try
             {
                 _gr.UpdateGenreById(genre);

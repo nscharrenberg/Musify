@@ -146,10 +146,6 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Create(Artist artist)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Create", new Artist());
-            }
 
             try
             {
@@ -211,10 +207,7 @@ namespace Musify_Web.Controllers
         [HttpPost]
         public ActionResult Edit(Artist artist)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Edit", artist);
-            }
+
 
             try
             {
